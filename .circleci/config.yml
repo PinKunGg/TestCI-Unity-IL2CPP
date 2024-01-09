@@ -9,10 +9,14 @@ jobs:
     resource_class: owaowa/test
     steps:
       - run: echo "Hi I'm on Runners!"
+  testjob:
+    steps:
+      - checkout
 
 workflows:
   test-unity-project:
     jobs:
+      - testjob
       # - unity/create-activation-file:
       #     editor_version: "2022.1.11f1"
 
@@ -80,19 +84,19 @@ workflows:
       #     context: unity
       #     name: build-Windows-mono
 
-      # Ubuntu Android
-      - unity/build:
-          build-method: 'BuildCommand.PerformBuild'
-          executor:
-            name: unity/ubuntu
-            editor_version: 2023.1.13f1
-            target_platform: android
-            resource_class: large
-          step-name: Build Android
-          unity-license-var-name: 'UNITY_ENCODED_LICENSE'
-          unity-username-var-name: 'UNITY_USERNAME'
-          unity-password-var-name: 'UNITY_PASSWORD'
-          build-target: Android
-          compress: true
-          context: unity
-          name: build-Android-ubuntu
+      # # Ubuntu Android
+      # - unity/build:
+      #     build-method: 'BuildCommand.PerformBuild'
+      #     executor:
+      #       name: unity/ubuntu
+      #       editor_version: 2023.1.13f1
+      #       target_platform: android
+      #       resource_class: large
+      #     step-name: Build Android
+      #     unity-license-var-name: 'UNITY_ENCODED_LICENSE'
+      #     unity-username-var-name: 'UNITY_USERNAME'
+      #     unity-password-var-name: 'UNITY_PASSWORD'
+      #     build-target: Android
+      #     compress: true
+      #     context: unity
+      #     name: build-Android-ubuntu
