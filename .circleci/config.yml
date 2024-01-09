@@ -63,14 +63,14 @@ workflows:
             editor_version: 2023.1.13f1
             target_platform: windows-mono
             resource_class: large
-          step-name: Build Windows
+          step-name: Build Windows Mono
           unity-license-var-name: 'UNITY_ENCODED_LICENSE'
           unity-username-var-name: 'UNITY_USERNAME'
           unity-password-var-name: 'UNITY_PASSWORD'
           build-target: StandaloneWindows64
           compress: true
           context: unity
-          name: build-Windows
+          name: build-Windows-mono
 
       # - unity/build:
       #     executor:
