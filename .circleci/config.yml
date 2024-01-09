@@ -3,9 +3,17 @@ version: 2.1
 orbs:
   unity: game-ci/unity@1.7.0
 
+jobs:
+  runner-test:
+    machine: true
+    resource_class: owaowa/test
+    steps:
+      - run: echo "Hi I'm on Runners!"
+
 workflows:
   test-unity-project:
     jobs:
+      - runner-test
       # - unity/create-activation-file:
       #     editor_version: "2022.1.11f1"
 
@@ -40,22 +48,22 @@ workflows:
       #     context: unity
       #     name: build-Windows-il2cpp
       
-      #Windows-Runner-IL2CPP
-      - unity/build:
-          build-method: 'BuildCommand.PerformBuild'
-          executor:
-            name: unity/windows-runner
-            editor_version: 2022.1.11f1
-            target_platform: windows-il2cpp
-            resource_class: owaowa/test
-          step-name: Build Windows IL2CPP
-          unity-license-var-name: 'UNITY_ENCODED_LICENSE'
-          unity-username-var-name: 'UNITY_USERNAME'
-          unity-password-var-name: 'UNITY_PASSWORD'
-          build-target: StandaloneWindows64
-          compress: true
-          context: unity
-          name: build-Windows-il2cpp
+      # #Windows-Runner-IL2CPP
+      # - unity/build:
+      #     build-method: 'BuildCommand.PerformBuild'
+      #     executor:
+      #       name: unity/windows-runner
+      #       editor_version: 2022.1.11f1
+      #       target_platform: windows-il2cpp
+      #       resource_class: owaowa/test
+      #     step-name: Build Windows IL2CPP
+      #     unity-license-var-name: 'UNITY_ENCODED_LICENSE'
+      #     unity-username-var-name: 'UNITY_USERNAME'
+      #     unity-password-var-name: 'UNITY_PASSWORD'
+      #     build-target: StandaloneWindows64
+      #     compress: true
+      #     context: unity
+      #     name: build-Windows-il2cpp
 
       #Ubuntu Window-Mono
       # - unity/build:
