@@ -6,11 +6,6 @@ orbs:
 workflows:
   test-unity-project:
     jobs:
-      docker:
-      - image: cimg/base:current
-      resource_class: owaowa/test-unity-ci
-      steps:
-        - run: echo "Hi~"
       # - unity/create-activation-file:
       #     editor_version: "2022.1.11f1"
 
