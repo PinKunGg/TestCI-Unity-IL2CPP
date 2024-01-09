@@ -24,8 +24,8 @@ workflows:
   test-unity-project:
     jobs:
       - testjob
-      # - unity/create-activation-file:
-      #     editor_version: "2022.1.11f1"
+      - unity/create-activation-file:
+          editor_version: "2022.1.11f1"
 
       # Ubuntu/Test-Windows-Mono
       # - unity/test:
