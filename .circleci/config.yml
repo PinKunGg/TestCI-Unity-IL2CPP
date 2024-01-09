@@ -55,7 +55,7 @@ workflows:
           build-target: StandaloneWindows64
           compress: true
           context: unity
-          name: build-Windows
+          name: build-Windows-il2cpp
 
       # - unity/build:
       #     executor:
