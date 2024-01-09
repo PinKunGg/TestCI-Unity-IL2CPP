@@ -23,7 +23,6 @@ jobs:
 workflows:
   test-unity-project:
     jobs:
-      - testjob
       - unity/create-activation-file:
           editor_version: "2022.1.11f1"
 
