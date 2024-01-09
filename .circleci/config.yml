@@ -24,36 +24,36 @@ workflows:
       #     name: test-windows
 
       #Windows-IL2CPP
-      # - unity/build:
-      #     executor:
-      #       name: unity/windows-2019
-      #       editor_version: 2023.1.13f1
-      #       target_platform: windows-il2cpp
-      #       size: large
-      #     step-name: Build Windows IL2CPP
-      #     unity-license-var-name: 'UNITY_ENCODED_LICENSE'
-      #     unity-username-var-name: 'UNITY_USERNAME'
-      #     unity-password-var-name: 'UNITY_PASSWORD'
-      #     build-target: StandaloneWindows64
-      #     compress: true
-      #     context: unity
-      #     name: build-Windows-il2cpp
-
-      #Ubuntu Window-Mono
       - unity/build:
           executor:
-            name: unity/ubuntu
+            name: unity/windows-2019
             editor_version: 2023.1.13f1
-            target_platform: windows-mono
-            resource_class: large
-          step-name: Build Windows Mono
+            target_platform: windows-il2cpp
+            size: large
+          step-name: Build Windows IL2CPP
           unity-license-var-name: 'UNITY_ENCODED_LICENSE'
           unity-username-var-name: 'UNITY_USERNAME'
           unity-password-var-name: 'UNITY_PASSWORD'
           build-target: StandaloneWindows64
           compress: true
           context: unity
-          name: build-Windows-mono
+          name: build-Windows-il2cpp
+
+      #Ubuntu Window-Mono
+      # - unity/build:
+      #     executor:
+      #       name: unity/ubuntu
+      #       editor_version: 2023.1.13f1
+      #       target_platform: windows-mono
+      #       resource_class: large
+      #     step-name: Build Windows Mono
+      #     unity-license-var-name: 'UNITY_ENCODED_LICENSE'
+      #     unity-username-var-name: 'UNITY_USERNAME'
+      #     unity-password-var-name: 'UNITY_PASSWORD'
+      #     build-target: StandaloneWindows64
+      #     compress: true
+      #     context: unity
+      #     name: build-Windows-mono
 
       #Ubuntu Android
       # - unity/build:
