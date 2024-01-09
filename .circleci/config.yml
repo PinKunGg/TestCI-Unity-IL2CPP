@@ -47,7 +47,7 @@ workflows:
             name: unity/windows-runner
             editor_version: 2022.1.11f1
             target_platform: windows-il2cpp
-            resource_class: owaowa/test-unity-ci
+            resource_class: owaowa/test
           step-name: Build Windows IL2CPP
           unity-license-var-name: 'UNITY_ENCODED_LICENSE'
           unity-username-var-name: 'UNITY_USERNAME'
