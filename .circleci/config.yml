@@ -2,33 +2,14 @@ version: 2.1
 
 orbs:
   unity: game-ci/unity@1.7.0
-  windows: circleci/windows@5.0.0
-
-jobs:
-  unity-test:
-    description: unity test
-    executor:
-      name: windows/default
-      #  name: unity/windows-2019
-      #  editor_version: 2023.1.13f1
-      #  target_platform: windows-il2cpp
-      #  size: large
-    steps:
-      - run:
-          name: Display env variables
-          command: printenv
-      - add_ssh_keys:
-          fingerprints:
-            - "62:fd:4b:73:5b:b4:c1:45:88:e3:80:cc:ce:0b:c9:a9"
-      - checkout
-
 
 workflows:
   test-unity-project:
     jobs:
-      # - unity/create-activation-file:
-      #     editor_version: "2023.1.13f1-windows-mono-3.0.1"
-      
+      - unity/create-activation-file:
+          editor_version: "2022.1.11f1"
+
+      #Ubuntu/Test-Windows-Mono
       # - unity/test:
       #     executor:
       #       name: unity/ubuntu
@@ -42,6 +23,7 @@ workflows:
       #     context: unity
       #     name: test-windows
 
+      #Windows-IL2CPP
       # - unity/build:
       #     executor:
       #       name: unity/windows-2019
@@ -57,21 +39,23 @@ workflows:
       #     context: unity
       #     name: build-Windows-il2cpp
 
-      - unity/build:
-          executor:
-            name: unity/ubuntu
-            editor_version: 2023.1.13f1
-            target_platform: windows-mono
-            resource_class: large
-          step-name: Build Windows Mono
-          unity-license-var-name: 'UNITY_ENCODED_LICENSE'
-          unity-username-var-name: 'UNITY_USERNAME'
-          unity-password-var-name: 'UNITY_PASSWORD'
-          build-target: StandaloneWindows64
-          compress: true
-          context: unity
-          name: build-Windows-mono
+      #Ubuntu Window-Mono
+      # - unity/build:
+      #     executor:
+      #       name: unity/ubuntu
+      #       editor_version: 2023.1.13f1
+      #       target_platform: windows-mono
+      #       resource_class: large
+      #     step-name: Build Windows Mono
+      #     unity-license-var-name: 'UNITY_ENCODED_LICENSE'
+      #     unity-username-var-name: 'UNITY_USERNAME'
+      #     unity-password-var-name: 'UNITY_PASSWORD'
+      #     build-target: StandaloneWindows64
+      #     compress: true
+      #     context: unity
+      #     name: build-Windows-mono
 
+      #Ubuntu Android
       # - unity/build:
       #     executor:
       #       name: unity/ubuntu
