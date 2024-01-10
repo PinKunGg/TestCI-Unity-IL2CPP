@@ -3,17 +3,18 @@ using System.Linq;
 using System;
 using System.IO;
 
-static class BuildCommand
+static class GameCIBuildCommand
 {
     private const string KEYSTORE_PASS = "KEYSTORE_PASS";
     private const string KEY_ALIAS_PASS = "KEY_ALIAS_PASS";
     private const string KEY_ALIAS_NAME = "KEY_ALIAS_NAME";
     private const string KEYSTORE = "keystore.keystore";
     private const string BUILD_OPTIONS_ENV_VAR = "BuildOptions";
-    private const string ANDROID_BUNDLE_VERSION_CODE = "BUNDLE_VERSION_CODE";
+    private const string ANDROID_BUNDLE_VERSION_CODE = "VERSION_BUILD_VAR";
     private const string ANDROID_APP_BUNDLE = "BUILD_APP_BUNDLE";
     private const string SCRIPTING_BACKEND_ENV_VAR = "SCRIPTING_BACKEND";
     private const string VERSION_NUMBER_VAR = "VERSION_NUMBER_VAR";
+    private const string VERSION_iOS = "VERSION_BUILD_VAR";
 
     static string GetArgument(string name)
     {
@@ -28,14 +29,26 @@ static class BuildCommand
         return null;
     }
 
+    private static string[] GetScences()
+    {
+        List<string> scenes = new List<string>();
+        foreach (var scene in EditorBuildSettings.scenes)
+        {
+            if (scene.enabled)
+                scenes.Add(scene.path);
+        }
+        return scenes.ToArray();
+    }
+
     static string[] GetEnabledScenes()
     {
-        return (
-            from scene in EditorBuildSettings.scenes
-            where scene.enabled
-            where !string.IsNullOrEmpty(scene.path)
-            select scene.path
-        ).ToArray();
+        return GetScences();
+        // return (
+        //     from scene in EditorBuildSettings.scenes
+        //     where scene.enabled
+        //     where !string.IsNullOrEmpty(scene.path)
+        //     select scene.path
+        // ).ToArray();
     }
 
     static BuildTarget GetBuildTarget()
@@ -46,10 +59,10 @@ static class BuildCommand
         if (buildTargetName.ToLower() == "android")
         {
 #if !UNITY_5_6_OR_NEWER
-			// https://issuetracker.unity3d.com/issues/buildoptions-dot-acceptexternalmodificationstoplayer-causes-unityexception-unknown-project-type-0
-			// Fixed in Unity 5.6.0
-			// side effect to fix android build system:
-			EditorUserBuildSettings.androidBuildSystem = AndroidBuildSystem.Internal;
+            // https://issuetracker.unity3d.com/issues/buildoptions-dot-acceptexternalmodificationstoplayer-causes-unityexception-unknown-project-type-0
+            // Fixed in Unity 5.6.0
+            // side effect to fix android build system:
+            EditorUserBuildSettings.androidBuildSystem = AndroidBuildSystem.Internal;
 #endif
         }
 
@@ -170,20 +183,24 @@ static class BuildCommand
         else
         {
             var defaultBackend = PlayerSettings.GetDefaultScriptingBackend(targetGroup);
-            Console.WriteLine($":: Using project's configured ScriptingBackend (should be {defaultBackend} for tagetGroup {targetGroup}");
+            Console.WriteLine($":: Using project's configured ScriptingBackend (should be {defaultBackend} for targetGroup {targetGroup}");
         }
     }
 
     static void PerformBuild()
     {
+        var buildTarget = GetBuildTarget();
+
         Console.WriteLine(":: Performing build");
-        if (TryGetEnv(VERSION_NUMBER_VAR, out string bundleVersionNumber))
+        if (TryGetEnv(VERSION_NUMBER_VAR, out var bundleVersionNumber))
         {
-            Console.WriteLine($":: Setting bundleVersionNumber to {bundleVersionNumber}");
+            if (buildTarget == BuildTarget.iOS)
+            {
+                bundleVersionNumber = GetIosVersion();
+            }
+            Console.WriteLine($":: Setting bundleVersionNumber to '{bundleVersionNumber}' (Length: {bundleVersionNumber.Length})");
             PlayerSettings.bundleVersion = bundleVersionNumber;
         }
-
-        var buildTarget = GetBuildTarget();
 
         if (buildTarget == BuildTarget.Android)
         {
@@ -220,7 +237,6 @@ static class BuildCommand
             else
             {
                 Console.WriteLine($":: {ANDROID_APP_BUNDLE} env var detected but the value \"{value}\" is not a boolean.");
-
             }
 #else
             Console.WriteLine($":: {ANDROID_APP_BUNDLE} env var detected but does not work with lower Unity version than 2018.3");
@@ -240,6 +256,22 @@ static class BuildCommand
             else
                 Console.WriteLine($":: {ANDROID_BUNDLE_VERSION_CODE} env var detected but the version value \"{value}\" is not an integer.");
         }
+    }
+
+    private static string GetIosVersion()
+    {
+        if (TryGetEnv(VERSION_iOS, out string value))
+        {
+            if (int.TryParse(value, out int version))
+            {
+                Console.WriteLine($":: {VERSION_iOS} env var detected, set the version to {value}.");
+                return version.ToString();
+            }
+            else
+                Console.WriteLine($":: {VERSION_iOS} env var detected but the version value \"{value}\" is not an integer.");
+        }
+
+        throw new ArgumentNullException(nameof(value), $":: Error finding {VERSION_iOS} env var");
     }
 
     private static void HandleAndroidKeystore()
