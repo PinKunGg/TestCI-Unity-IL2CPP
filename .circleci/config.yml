@@ -22,11 +22,14 @@ jobs:
 
   # Ubuntu Android Build 2
   build-android-ubuntu:
-        executor:
-          name: unity/ubuntu
-          editor_version: 2023.1.13f1
-          resource_class: large
-          target_platform: android
+        machine: # executor type
+          image: ubuntu-2004:202010-01 # # recommended linux image - includes Ubuntu 20.04, docker 19.03.13, docker-compose 1.27.4
+        resource_class: large
+        # executor:
+        #   name: unity/ubuntu
+        #   editor_version: 2023.1.13f1
+        #   resource_class: large
+        #   target_platform: android
         steps:
           # - add_ssh_keys:
           #     fingerprints:
