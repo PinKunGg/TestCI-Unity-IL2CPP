@@ -33,10 +33,10 @@ jobs:
           #       - "70:ad:8c:c9:4c:3e:31:35:3e:85:50:18:23:8d:50:d5"
           - checkout
           - unity/prepare-env
+          - fetch-submodules: true
           - unity/build:
               build-target: Android
               compress: true
-              fetch-submodules: true
               build-method: 'MyWorldBuildCommand.BuildAndroidDevelopment'
               # build-method: 'GameCIBuildCommand.PerformBuild'
           - unity/return-license
