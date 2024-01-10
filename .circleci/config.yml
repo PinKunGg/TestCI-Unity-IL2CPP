@@ -32,6 +32,8 @@ jobs:
           #     fingerprints:
           #       - "70:ad:8c:c9:4c:3e:31:35:3e:85:50:18:23:8d:50:d5"
           - checkout
+          - unity/create-activation-file:
+              editor_version: "2022.1.11f1"
           - unity/prepare-env
           - unity/build:
               build-target: Android
@@ -40,17 +42,25 @@ jobs:
               # build-method: 'GameCIBuildCommand.PerformBuild'
           - unity/return-license
 
-workflows:
+  create-unity-activation-file:
+        executor:
+          name: unity/ubuntu
+          editor_version: 2023.1.13f1
+          target_platform: android
+        steps:
+          - unity/create-activation-file:
+              editor_version: "2022.1.11f1"
 
+
+
+workflows:
   build:
     jobs:
-      - unity/create-activation-file:
-          editor_version: "2022.1.11f1"
-
+      # - create-unity-activation-file
       - build-android-ubuntu:
           context: unity
-          requires:
-            - unity/create-activation-file
+          # requires:
+          #   - create-unity-activation-file
 
       # Ubuntu/Test-Windows-Mono
       # - unity/test:

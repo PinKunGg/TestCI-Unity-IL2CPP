@@ -55,7 +55,8 @@ public static class MyWorldBuildCommand
         // PlayerSettings.keyaliasPass = Environment.GetEnvironmentVariable("ANDROID_KEYALIAS_PASS");
         BuildReport result = BuildPipeline.BuildPlayer(new BuildPlayerOptions
         {
-            locationPathName = "Builds/Android/android.abb",
+            // locationPathName = "Builds/Android/android.aab",
+            // locationPathName = "Builds/Android/",
             scenes = GetScences(),
             target = BuildTarget.Android,
             targetGroup = BuildTargetGroup.Android,
