@@ -46,11 +46,11 @@ workflows:
     jobs:
       - unity/create-activation-file:
           editor_version: "2022.1.11f1"
-          
+
       - build-android-ubuntu:
           context: unity
           requires:
-            - create-unity-activation-files
+            - unity/create-activation-file
 
       # Ubuntu/Test-Windows-Mono
       # - unity/test:
