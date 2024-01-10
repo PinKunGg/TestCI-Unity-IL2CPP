@@ -35,10 +35,12 @@ jobs:
           - unity/prepare-env
           - unity/build:
               build-target: Android
-              compress: true
+              compress: false
+              store-artifacts: false
+              persist-to-workspace: true
               # build-method: 'MyWorldBuildCommand.BuildAndroidDevelopment'
-              project-path: "."
-              build-method: 'GameCIBuildCommand.PerformBuild'
+              # project-path: "."
+              # build-method: 'GameCIBuildCommand.PerformBuild'
           - unity/return-license
 
   create-unity-activation-file:
@@ -56,8 +58,8 @@ workflows:
   build:
     jobs:
       # - create-unity-activation-file
-      # - build-android-ubuntu:
-      #     context: unity
+      - build-android-ubuntu:
+          context: unity
           # requires:
           #   - create-unity-activation-file
 
@@ -126,18 +128,18 @@ workflows:
       #     name: build-Windows-mono
 
       # Ubuntu Android
-      - unity/build:
-          # build-method: 'BuildCommand.PerformBuild'
-          executor:
-            name: unity/ubuntu
-            editor_version: 2023.1.13f1
-            target_platform: android
-            resource_class: large
-          step-name: Build Android
-          # unity-license-var-name: 'UNITY_ENCODED_LICENSE'
-          # unity-username-var-name: 'UNITY_USERNAME'
-          # unity-password-var-name: 'UNITY_PASSWORD'
-          build-target: Android
-          compress: true
-          context: unity
-          name: build-Android-ubuntu
+      # - unity/build:
+      #     # build-method: 'BuildCommand.PerformBuild'
+      #     executor:
+      #       name: unity/ubuntu
+      #       editor_version: 2023.1.13f1
+      #       target_platform: android
+      #       resource_class: large
+      #     step-name: Build Android
+      #     # unity-license-var-name: 'UNITY_ENCODED_LICENSE'
+      #     # unity-username-var-name: 'UNITY_USERNAME'
+      #     # unity-password-var-name: 'UNITY_PASSWORD'
+      #     build-target: Android
+      #     compress: true
+      #     context: unity
+      #     name: build-Android-ubuntu
