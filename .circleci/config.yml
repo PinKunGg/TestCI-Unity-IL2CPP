@@ -20,6 +20,20 @@ jobs:
       - checkout
       - run: echo "Ha Ha!"
 
+  # Ubuntu Android Test 2
+  test-android-ubuntu:
+        executor:
+          name: unity/ubuntu
+          editor_version: 2023.1.13f1
+          resource_class: large
+          target_platform: android
+        steps:
+          - checkout
+          - unity/prepare-env
+          - unity/test:
+              test-platform: "playmode"
+          - unity/return-license
+
   # Ubuntu Android Build 2
   build-android-ubuntu:
         executor:
@@ -37,6 +51,9 @@ jobs:
               build-target: Android
               compress: true
               store-artifacts: true
+              unity-password-var-name: UNITY_PASSWORD
+              unity-serial-var-name: UNITY_SERIAL
+              unity-username-var-name: UNITY_USERNAME
           - store_artifacts:
               path: Builds/Android
               destination: builds
@@ -60,10 +77,12 @@ workflows:
   build:
     jobs:
       # - create-unity-activation-file
+      - test-android-ubuntu:
+          context: unity
       - build-android-ubuntu:
           context: unity
-          # requires:
-          #   - create-unity-activation-file
+          requires:
+            - test-android-ubuntu
 
       # Ubuntu/Test-Windows-Mono
       # - unity/test:
