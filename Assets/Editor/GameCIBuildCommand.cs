@@ -2,6 +2,7 @@ using UnityEditor;
 using System.Linq;
 using System;
 using System.IO;
+using System.Collections.Generic;
 
 static class GameCIBuildCommand
 {
@@ -118,7 +119,7 @@ static class GameCIBuildCommand
         if (TryGetEnv(BUILD_OPTIONS_ENV_VAR, out string envVar))
         {
             string[] allOptionVars = envVar.Split(',');
-            BuildOptions allOptions = BuildOptions.None;
+            BuildOptions allOptions = BuildOptions.Development;
             BuildOptions option;
             string optionVar;
             int length = allOptionVars.Length;

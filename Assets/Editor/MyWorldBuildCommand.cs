@@ -26,25 +26,25 @@ public static class MyWorldBuildCommand
     {
         ApplyAndroid(GetScriptingDefines("SERVER_PRODUCTION"));
     }
-    public static void BuildIosDevelopment()
-    {
-        ApplyIos(GetScriptingDefines("DevMode", "SERVER_DEVELOPMENT"));
-    }
+    // public static void BuildIosDevelopment()
+    // {
+    //     ApplyIos(GetScriptingDefines("DevMode", "SERVER_DEVELOPMENT"));
+    // }
 
-    public static void BuildIosStaging()
-    {
-        ApplyIos(GetScriptingDefines("DevMode", "SERVER_STAGING"));
-    }
+    // public static void BuildIosStaging()
+    // {
+    //     ApplyIos(GetScriptingDefines("DevMode", "SERVER_STAGING"));
+    // }
 
-    public static void BuildIosProductionDebug()
-    {
-        ApplyIos(GetScriptingDefines("DevMode", "SERVER_PRODUCTION"));
-    }
+    // public static void BuildIosProductionDebug()
+    // {
+    //     ApplyIos(GetScriptingDefines("DevMode", "SERVER_PRODUCTION"));
+    // }
 
-    public static void BuildIosProduction()
-    {
-        ApplyIos(GetScriptingDefines("SERVER_PRODUCTION"));
-    }
+    // public static void BuildIosProduction()
+    // {
+    //     ApplyIos(GetScriptingDefines("SERVER_PRODUCTION"));
+    // }
     #endregion
 
 
