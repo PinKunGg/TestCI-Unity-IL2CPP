@@ -36,8 +36,9 @@ jobs:
           - unity/build:
               build-target: Android
               compress: true
-              build-method: 'MyWorldBuildCommand.BuildAndroidDevelopment'
-              # build-method: 'GameCIBuildCommand.PerformBuild'
+              # build-method: 'MyWorldBuildCommand.BuildAndroidDevelopment'
+              project-path: "."
+              build-method: 'GameCIBuildCommand.PerformBuild'
           - unity/return-license
 
   create-unity-activation-file:
