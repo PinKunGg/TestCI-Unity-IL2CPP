@@ -53,12 +53,12 @@ jobs:
               build-target: Android
               compress: true
               store-artifacts: true
-          - store_artifacts:
-              path: Builds/Android
-              destination: builds
               build-method: 'MyWorldBuildCommand.BuildAndroidDevelopment'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
+          - store_artifacts:
+              path: Builds/Android
+              destination: builds
           - unity/return-license
 
   create-unity-activation-file:
