@@ -41,13 +41,12 @@ jobs:
           - unity/return-license
 
 workflows:
-  create-unity-activation-files:
+
+  build:
     jobs:
       - unity/create-activation-file:
           editor_version: "2022.1.11f1"
-  
-  build:
-    jobs:
+          
       - build-android-ubuntu:
           context: unity
           requires:
