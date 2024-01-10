@@ -51,9 +51,6 @@ jobs:
               build-target: Android
               compress: true
               store-artifacts: true
-              unity-password-var-name: UNITY_PASSWORD
-              unity-serial-var-name: UNITY_SERIAL
-              unity-username-var-name: UNITY_USERNAME
           - store_artifacts:
               path: Builds/Android
               destination: builds
