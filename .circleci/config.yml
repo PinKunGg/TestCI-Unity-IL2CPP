@@ -35,9 +35,11 @@ jobs:
           - unity/prepare-env
           - unity/build:
               build-target: Android
-              compress: false
-              store-artifacts: false
-              persist-to-workspace: true
+              compress: true
+              store-artifacts: true
+          - store_artifacts:
+              path: Builds/Android
+              destination: builds
               # build-method: 'MyWorldBuildCommand.BuildAndroidDevelopment'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
