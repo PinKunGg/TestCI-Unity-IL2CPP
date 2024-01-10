@@ -19,10 +19,33 @@ jobs:
             - "70:ad:8c:c9:4c:3e:31:35:3e:85:50:18:23:8d:50:d5"
       - checkout
       - run: echo "Ha Ha!"
+      
+  # Ubuntu Android Build 2
+  build-android-ubuntu:
+        executor:
+          name: unity/ubuntu
+          editor_version: 2023.1.13f1
+          resource_class: large
+          target_platform: android
+        steps:
+          # - add_ssh_keys:
+          #     fingerprints:
+          #       - "70:ad:8c:c9:4c:3e:31:35:3e:85:50:18:23:8d:50:d5"
+          - checkout
+          - unity/prepare-env
+          - unity/build:
+              executor:
+                name: unity/ubuntu
+                editor_version: 2023.1.13f1
+                resource_class: large
+                target_platform: android
+              build-target: Android
+              compress: true
 
 workflows:
   test-unity-project:
     jobs:
+      - build-android-ubuntu
       # - unity/create-activation-file:
       #     editor_version: "2022.1.11f1"
 
@@ -91,18 +114,18 @@ workflows:
       #     name: build-Windows-mono
 
       # Ubuntu Android
-      - unity/build:
-          build-method: 'BuildCommand.PerformBuild'
-          executor:
-            name: unity/ubuntu
-            editor_version: 2023.1.13f1
-            target_platform: android
-            resource_class: large
-          step-name: Build Android
-          unity-license-var-name: 'UNITY_ENCODED_LICENSE'
-          unity-username-var-name: 'UNITY_USERNAME'
-          unity-password-var-name: 'UNITY_PASSWORD'
-          build-target: Android
-          compress: true
-          context: unity
-          name: build-Android-ubuntu
+      # - unity/build:
+      #     build-method: 'BuildCommand.PerformBuild'
+      #     executor:
+      #       name: unity/ubuntu
+      #       editor_version: 2023.1.13f1
+      #       target_platform: android
+      #       resource_class: large
+      #     step-name: Build Android
+      #     unity-license-var-name: 'UNITY_ENCODED_LICENSE'
+      #     unity-username-var-name: 'UNITY_USERNAME'
+      #     unity-password-var-name: 'UNITY_PASSWORD'
+      #     build-target: Android
+      #     compress: true
+      #     context: unity
+      #     name: build-Android-ubuntu
