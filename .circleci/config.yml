@@ -53,9 +53,9 @@ jobs:
               build-target: Android
               compress: true
               store-artifacts: true
-              build-method: 'MyWorldBuildCommand.BuildAndroidDevelopment'
+              # build-method: 'MyWorldBuildCommand.BuildAndroidDevelopment'
               # project-path: "."
-              # build-method: 'GameCIBuildCommand.PerformBuild'
+              build-method: 'GameCIBuildCommand.PerformBuild'
           - store_artifacts:
               path: Builds/Android
               destination: builds
