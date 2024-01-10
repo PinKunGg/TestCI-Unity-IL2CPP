@@ -56,7 +56,7 @@ public static class MyWorldBuildCommand
         BuildReport result = BuildPipeline.BuildPlayer(new BuildPlayerOptions
         {
             // locationPathName = "Builds/Android/android.aab",
-            // locationPathName = "Builds/Android/",
+            locationPathName = "Builds/Android/",
             scenes = GetScences(),
             target = BuildTarget.Android,
             targetGroup = BuildTargetGroup.Android,
