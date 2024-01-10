@@ -27,8 +27,6 @@ jobs:
           editor_version: 2023.1.13f1
           resource_class: large
           target_platform: android
-        context: unity
-        fetch-submodules: true
         steps:
           # - add_ssh_keys:
           #     fingerprints:
@@ -46,6 +44,8 @@ workflows:
   test-unity-project:
     jobs:
       - build-android-ubuntu
+          fetch-submodules: true
+          context: unity
       # - unity/create-activation-file:
       #     editor_version: "2022.1.11f1"
 
