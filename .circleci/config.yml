@@ -31,11 +31,11 @@ jobs:
           # - add_ssh_keys:
           #     fingerprints:
           #       - "70:ad:8c:c9:4c:3e:31:35:3e:85:50:18:23:8d:50:d5"
-          # - checkout
-          # - unity/prepare-env
-          # - unity/build:
-          #     build-target: Android
-          #     compress: true
+          - checkout
+          - unity/prepare-env
+          - unity/build:
+              build-target: Android
+              compress: true
           - unity/return-license
 
 workflows:
