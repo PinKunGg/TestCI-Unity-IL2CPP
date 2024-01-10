@@ -50,8 +50,8 @@ workflows:
     jobs:
       - build-android-ubuntu:
           context: unity
-      requires:
-        - create-unity-activation-files
+        requires:
+          - create-unity-activation-files
 
       # Ubuntu/Test-Windows-Mono
       # - unity/test:
