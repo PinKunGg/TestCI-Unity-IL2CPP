@@ -36,6 +36,7 @@ jobs:
           - unity/build:
               build-target: Android
               compress: true
+              fetch-submodules: true
               build-method: 'MyWorldBuildCommand.BuildAndroidDevelopment'
               # build-method: 'GameCIBuildCommand.PerformBuild'
           - unity/return-license
