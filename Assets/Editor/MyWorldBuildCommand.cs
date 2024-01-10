@@ -50,6 +50,8 @@ public static class MyWorldBuildCommand
 
     private static void ApplyAndroid(string[] scriptsDefines)
     {
+        Console.WriteLine($">>>>>License: {UnityEngine.Windows.LicenseInformation.isOnAppTrial}");
+
         // EditorUserBuildSettings.buildAppBundle = true;
         // PlayerSettings.keystorePass = Environment.GetEnvironmentVariable("ANDROID_KEYSTORE_PASS");
         // PlayerSettings.keyaliasPass = Environment.GetEnvironmentVariable("ANDROID_KEYALIAS_PASS");

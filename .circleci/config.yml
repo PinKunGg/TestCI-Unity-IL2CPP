@@ -56,7 +56,7 @@ jobs:
           - store_artifacts:
               path: Builds/Android
               destination: builds
-              # build-method: 'MyWorldBuildCommand.BuildAndroidDevelopment'
+              build-method: 'MyWorldBuildCommand.BuildAndroidDevelopment'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
           - unity/return-license
