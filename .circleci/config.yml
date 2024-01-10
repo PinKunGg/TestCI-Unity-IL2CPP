@@ -49,7 +49,6 @@ workflows:
   build:
     jobs:
       - build-android-ubuntu:
-          fetch-submodules: true
           context: unity
 
       # Ubuntu/Test-Windows-Mono
