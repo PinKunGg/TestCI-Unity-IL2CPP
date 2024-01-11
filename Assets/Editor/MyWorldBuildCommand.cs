@@ -10,6 +10,11 @@ public static class MyWorldBuildCommand
 {
     #region Entry point
 
+    public static void CustomBuildAndroid()
+    {
+        ApplyAndroid();
+    }
+
     public static void BuildAndroidDevelopment()
     {
         ApplyAndroid(GetScriptingDefines("DevMode", "SERVER_DEVELOPMENT"));
@@ -55,15 +60,40 @@ public static class MyWorldBuildCommand
         // EditorUserBuildSettings.buildAppBundle = true;
         // PlayerSettings.keystorePass = Environment.GetEnvironmentVariable("ANDROID_KEYSTORE_PASS");
         // PlayerSettings.keyaliasPass = Environment.GetEnvironmentVariable("ANDROID_KEYALIAS_PASS");
-        BuildReport result = BuildPipeline.BuildPlayer(new BuildPlayerOptions
-        {
-            locationPathName = "Builds/Android/android.aab",
-            scenes = GetScences(),
-            target = BuildTarget.Android,
-            targetGroup = BuildTargetGroup.Android,
-            options = BuildOptions.CompressWithLz4,
-            // extraScriptingDefines = scriptsDefines,
-        });
+        // BuildReport result = BuildPipeline.BuildPlayer(new BuildPlayerOptions
+        // {
+        //     locationPathName = "Builds/Android/android.aab",
+        //     scenes = GetScences(),
+        //     target = BuildTarget.Android,
+        //     targetGroup = BuildTargetGroup.Android,
+        //     options = BuildOptions.CompressWithLz4,
+        //     // extraScriptingDefines = scriptsDefines,
+        // });
+
+        var result = BuildPipeline.BuildPlayer(GetScences(), "Builds/Android/android.apk", BuildTarget.Android, BuildOptions.None);
+
+        PrintGameciResult(result.summary);
+    }
+
+    private static void ApplyAndroid()
+    {
+        Console.WriteLine($">>>>>License: {UnityEngine.Windows.LicenseInformation.isOnAppTrial}");
+
+        // EditorUserBuildSettings.buildAppBundle = true;
+        // PlayerSettings.keystorePass = Environment.GetEnvironmentVariable("ANDROID_KEYSTORE_PASS");
+        // PlayerSettings.keyaliasPass = Environment.GetEnvironmentVariable("ANDROID_KEYALIAS_PASS");
+        // BuildReport result = BuildPipeline.BuildPlayer(new BuildPlayerOptions
+        // {
+        //     locationPathName = "Builds/Android/android.aab",
+        //     scenes = GetScences(),
+        //     target = BuildTarget.Android,
+        //     targetGroup = BuildTargetGroup.Android,
+        //     options = BuildOptions.CompressWithLz4,
+        //     // extraScriptingDefines = scriptsDefines,
+        // });
+
+        var result = BuildPipeline.BuildPlayer(GetScences(), "Builds/Android/android.apk", BuildTarget.Android, BuildOptions.None);
+
         PrintGameciResult(result.summary);
     }
 
