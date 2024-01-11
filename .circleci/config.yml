@@ -53,7 +53,7 @@ jobs:
           - unity/build:
               build-target: Android
               compress: true
-              store-artifacts: true
+              cache-version: v2
               # build-method: 'MyWorldBuildCommand.BuildAndroidDevelopment'
               # project-path: "."
               build-method: 'GameCIBuildCommand.PerformBuild'
