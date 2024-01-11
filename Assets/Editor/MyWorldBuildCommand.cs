@@ -92,6 +92,9 @@ public static class MyWorldBuildCommand
         //     // extraScriptingDefines = scriptsDefines,
         // });
 
+        PlayerSettings.SplashScreen.show = true;
+        PlayerSettings.SplashScreen.showUnityLogo = true;
+
         var result = BuildPipeline.BuildPlayer(GetScences(), "Builds/Android/android.apk", BuildTarget.Android, BuildOptions.None);
 
         PrintGameciResult(result.summary);
