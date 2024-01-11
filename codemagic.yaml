@@ -22,7 +22,7 @@ workflows:
             -projectPath . \
             -executeMethod GameCIBuildCommand.PerformBuild \
             -nographics
-      artifacts:
+    artifacts:
         - android/*.aab
     publishing:
       scripts:
@@ -35,6 +35,6 @@ workflows:
       email:
         recipients:
           - nattpat.pinn@gmail.com
-      notify:
+        notify:
           success: true
           failure: false
