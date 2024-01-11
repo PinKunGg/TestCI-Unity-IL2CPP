@@ -191,6 +191,7 @@ static class GameCIBuildCommand
     static void PerformBuild()
     {
         PlayerSettings.SplashScreen.showUnityLogo = true;
+        PlayerSettings.SplashScreen.show = true;
 
         var buildTarget = GetBuildTarget();
 
