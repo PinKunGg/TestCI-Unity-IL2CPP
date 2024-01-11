@@ -190,6 +190,8 @@ static class GameCIBuildCommand
 
     static void PerformBuild()
     {
+        PlayerSettings.SplashScreen.showUnityLogo = true;
+
         var buildTarget = GetBuildTarget();
 
         Console.WriteLine($">>>LicenseInformation.isOnAppTrial: {UnityEngine.Windows.LicenseInformation.isOnAppTrial}");
