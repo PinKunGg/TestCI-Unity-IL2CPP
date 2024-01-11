@@ -56,6 +56,7 @@ jobs:
               # build-method: 'MyWorldBuildCommand.BuildAndroidDevelopment'
               # project-path: "."
               build-method: 'GameCIBuildCommand.PerformBuild'
+              project-path: TestCI-Unity-IL2CPP
           - store_artifacts:
               path: Builds/Android
               destination: builds

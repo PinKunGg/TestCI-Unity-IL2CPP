@@ -192,7 +192,8 @@ static class GameCIBuildCommand
     {
         var buildTarget = GetBuildTarget();
 
-        Console.WriteLine($">>>>>License: {UnityEngine.Windows.LicenseInformation.isOnAppTrial}");
+        Console.WriteLine($">>>LicenseInformation.isOnAppTrial: {UnityEngine.Windows.LicenseInformation.isOnAppTrial}");
+        Console.WriteLine($">>>PlayerSettings.Android.licenseVerification: {PlayerSettings.Android.licenseVerification}");
 
         Console.WriteLine(":: Performing build");
         if (TryGetEnv(VERSION_NUMBER_VAR, out var bundleVersionNumber))
