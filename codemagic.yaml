@@ -1,0 +1,40 @@
+workflows:
+  native-android:
+    name: Native Android
+    max_build_duration: 120
+    environment:
+      groups:
+        - unity
+      vars:
+        BUILD_SCRIPT: BuildAndroid
+    scripts:
+      - name: Activate Unity license
+        script: | 
+          $UNITY_HOME/Contents/MacOS/Unity -batchmode -quit -logFile \
+            -serial ${UNITY_SERIAL} \
+            -username ${UNITY_EMAIL} \
+            -password ${UNITY_PASSWORD}
+      - name: Build the project
+        script: | 
+          $UNITY_HOME/Contents/MacOS/Unity -batchmode \
+            -quit \
+            -logFile \
+            -projectPath . \
+            -executeMethod GameCIBuildCommand.PerformBuild \
+            -nographics
+      artifacts:
+        - android/*.aab
+    publishing:
+      scripts:
+        - name: Deactivate Unity License
+          script: | 
+            /Applications/Unity\ Hub.app/Contents/Frameworks/UnityLicensingClient_V1.app/Contents/MacOS/Unity.Licensing.Client \
+            --return-ulf \
+            --username ${UNITY_EMAIL} \
+            --password ${UNITY_PASSWORD}
+      email:
+        recipients:
+          - nattpat.pinn@gmail.com
+      notify:
+          success: true
+          failure: false
