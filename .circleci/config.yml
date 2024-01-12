@@ -19,7 +19,7 @@ jobs:
       # Install Unity using Unity Hub
       - run:
           name: Install Unity
-          command: UnityHub install --version 2023.1.13f1
+          command: UnityHub install -v 2023.1.13f1 -m android android-sdk-ndk-tools android-open-jdk
 
       # Activate Unity license (if needed)
       # Uncomment and replace placeholders with your license information
