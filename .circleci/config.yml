@@ -1,171 +1,39 @@
 version: 2.1
 
-orbs:
-  unity: game-ci/unity@1.7.0
-  windows: circleci/windows@2.2.0
-
 jobs:
-  runner-test:
-    machine: true
-    resource_class: owaowa/test
+  build:
+    docker:
+      - image: circleci/node:latest
+
     steps:
-      - run: echo "Hi I'm on Runners!"
-  testjob:
-    executor:
-      name: windows/default
-    steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "70:ad:8c:c9:4c:3e:31:35:3e:85:50:18:23:8d:50:d5"
       - checkout
-      - run: echo "Ha Ha!"
 
-  # Ubuntu Android Test 2
-  test-android-ubuntu:
-        executor:
-          name: unity/ubuntu
-          editor_version: 2023.1.13f1
-          resource_class: large
-          target_platform: android
-        steps:
-          - checkout
-          - unity/prepare-env
-          - unity/test:
-              test-platform: "playmode"
-          - unity/return-license
+      # Install Unity Hub
+      - run:
+          name: Install Unity Hub
+          command: |
+            curl -sL https://public-cdn.cloud.unity3d.com/hub/prod/UnityHub.AppImage -o UnityHub.AppImage
+            chmod +x UnityHub.AppImage
+            sudo mv UnityHub.AppImage /usr/local/bin/UnityHub
 
-  # Ubuntu Android Build 2
-  build-android-ubuntu:
-        docker:
-          - image: unityci/editor:ubuntu-2023.1.13f1-android-3.0.1
-        # executor:
-        #   name: unity/ubuntu
-        #   editor_version: 2023.1.13f1
-        #   resource_class: large
-        #   target_platform: android
-        steps:
-          - setup_remote_docker
-          # - add_ssh_keys:
-          #     fingerprints:
-          #       - "70:ad:8c:c9:4c:3e:31:35:3e:85:50:18:23:8d:50:d5"
-          - checkout
-          - unity/prepare-env:
-              cache-version: v2.1
-          # - unity/test:
-          #     test-platform: "playmode"
-          - unity/build:
-              build-target: Android
-              compress: true
-              cache-version: v2.1
-              build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
-              # project-path: "."
-              # build-method: 'GameCIBuildCommand.PerformBuild'
-          - store_artifacts:
-              path: Builds/Android
-              destination: builds
-          # - unity/return-license
+      # Install Unity using Unity Hub
+      - run:
+          name: Install Unity
+          command: UnityHub install --version 2023.1.13f1
 
-  # create-unity-activation-file:
-  #       executor:
-  #         name: unity/ubuntu
-  #         editor_version: 2023.1.13f1
-  #         target_platform: android
-  #       steps:
-  #         - unity/create-activation-file:
-  #             editor_version: "2022.1.11f1"
+      # Activate Unity license (if needed)
+      # Uncomment and replace placeholders with your license information
+      # - run:
+      #     name: Activate Unity License
+      #     command: UnityHub activate -username <YOUR_USERNAME> -password <YOUR_PASSWORD>
 
-
+      # Run Unity build
+      - run:
+          name: Unity Build
+          command: UnityHub -quit -batchmode -logFile -projectPath /root/project/. -executeMethod MyWorldBuildCommand.CustomBuildAndroid
 
 workflows:
+  version: 2
   build:
     jobs:
-      # - create-unity-activation-file
-      # - unity/create-activation-file:
-      #     editor_version: 2022.1.11f1
-      # - test-android-ubuntu:
-      #     context: unity
-      - build-android-ubuntu:
-          context: unity
-          # requires:
-          #   - test-android-ubuntu
-
-      # Ubuntu/Test-Windows-Mono
-      # - unity/test:
-      #     executor:
-      #       name: unity/ubuntu
-      #       editor_version: 2023.1.13f1
-      #       target_platform: windows-mono
-      #       resource_class: large
-      #     unity-license-var-name: 'UNITY_ENCODED_LICENSE'
-      #     unity-username-var-name: 'UNITY_USERNAME'
-      #     unity-password-var-name: 'UNITY_PASSWORD'
-      #     test-platform: 'playmode'
-      #     context: unity
-      #     name: test-windows
-
-      # # Windows-IL2CPP
-      # - unity/build:
-      #     build-method: 'BuildCommand.PerformBuild'
-      #     executor:
-      #       name: unity/windows-2019
-      #       editor_version: 2022.1.11f1
-      #       target_platform: windows-il2cpp
-      #       size: large
-      #     step-name: Build Windows IL2CPP
-      #     unity-license-var-name: 'UNITY_ENCODED_LICENSE'
-      #     unity-username-var-name: 'UNITY_USERNAME'
-      #     unity-password-var-name: 'UNITY_PASSWORD'
-      #     build-target: StandaloneWindows64
-      #     compress: true
-      #     context: unity
-      #     name: build-Windows-il2cpp
-      
-      # # Windows-Runner-IL2CPP
-      # - unity/build:
-      #     build-method: 'BuildCommand.PerformBuild'
-      #     executor:
-      #       name: unity/windows-runner
-      #       editor_version: 2022.1.11f1
-      #       target_platform: windows-il2cpp
-      #       resource_class: owaowa/test
-      #     step-name: Build Windows IL2CPP
-      #     unity-license-var-name: 'UNITY_ENCODED_LICENSE'
-      #     unity-username-var-name: 'UNITY_USERNAME'
-      #     unity-password-var-name: 'UNITY_PASSWORD'
-      #     build-target: StandaloneWindows64
-      #     compress: true
-      #     context: unity
-      #     name: build-Windows-il2cpp
-
-      # # Ubuntu Window-Mono
-      # - unity/build:
-      #     executor:
-      #       name: unity/ubuntu
-      #       editor_version: 2023.1.13f1
-      #       target_platform: windows-mono
-      #       resource_class: large
-      #     step-name: Build Windows Mono
-      #     unity-license-var-name: 'UNITY_ENCODED_LICENSE'
-      #     unity-username-var-name: 'UNITY_USERNAME'
-      #     unity-password-var-name: 'UNITY_PASSWORD'
-      #     build-target: StandaloneWindows64
-      #     compress: true
-      #     context: unity
-      #     name: build-Windows-mono
-
-      # Ubuntu Android
-      # - unity/build:
-      #     # build-method: 'BuildCommand.PerformBuild'
-      #     executor:
-      #       name: unity/ubuntu
-      #       editor_version: 2023.1.13f1
-      #       target_platform: android
-      #       resource_class: large
-      #     step-name: Build Android
-      #     # unity-license-var-name: 'UNITY_ENCODED_LICENSE'
-      #     # unity-username-var-name: 'UNITY_USERNAME'
-      #     # unity-password-var-name: 'UNITY_PASSWORD'
-      #     build-target: Android
-      #     compress: true
-      #     context: unity
-      #     name: build-Android-ubuntu
+      - build
