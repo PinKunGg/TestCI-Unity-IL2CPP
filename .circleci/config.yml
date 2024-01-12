@@ -7,20 +7,7 @@ jobs:
 
     steps:
       - checkout
-
-      # Install Unity Hub
-      - run:
-          name: Install Unity Hub
-          command: |
-            curl -sL https://public-cdn.cloud.unity3d.com/hub/prod/UnityHub.AppImage -o UnityHub.AppImage
-            chmod +x UnityHub.AppImage
-            sudo mv UnityHub.AppImage /usr/local/bin/UnityHub
-
-      # Install Unity using Unity Hub
-      - run:
-          name: Install Unity
-          command: UnityHub install -v 2023.1.13f1 -m android android-sdk-ndk-tools android-open-jdk --without-fuse
-
+      
       # Activate Unity license (if needed)
       # Uncomment and replace placeholders with your license information
       # - run:
@@ -30,7 +17,7 @@ jobs:
       # Run Unity build
       - run:
           name: Unity Build
-          command: UnityHub -quit -batchmode -logFile -projectPath /root/project/. -executeMethod MyWorldBuildCommand.CustomBuildAndroid
+          command: Unity -quit -batchmode -logFile -projectPath "/root/project/." -executeMethod "MyWorldBuildCommand.CustomBuildAndroid"
 
 workflows:
   version: 2
