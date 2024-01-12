@@ -60,7 +60,7 @@ jobs:
           - store_artifacts:
               path: Builds/Android
               destination: builds
-          - unity/return-license
+          # - unity/return-license
 
   # create-unity-activation-file:
   #       executor:
