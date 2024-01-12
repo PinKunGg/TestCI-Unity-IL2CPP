@@ -1,3 +1,4 @@
+using System.IO.Compression;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -79,6 +80,18 @@ public static class MyWorldBuildCommand
     {
         Console.WriteLine($">>>>>License: {UnityEngine.Windows.LicenseInformation.isOnAppTrial}");
 
+        PlayerSettings.SplashScreen.show = true;
+        PlayerSettings.SplashScreen.showUnityLogo = true;
+
+        BuildPlayerOptions buildOpstions = new()
+        {
+            options = BuildOptions.Development,
+            scenes = GetScences(),
+            locationPathName = "Builds/Android/android.apk",
+            target = BuildTarget.Android,
+            targetGroup = BuildTargetGroup.Android
+        };
+
         // EditorUserBuildSettings.buildAppBundle = true;
         // PlayerSettings.keystorePass = Environment.GetEnvironmentVariable("ANDROID_KEYSTORE_PASS");
         // PlayerSettings.keyaliasPass = Environment.GetEnvironmentVariable("ANDROID_KEYALIAS_PASS");
@@ -92,7 +105,7 @@ public static class MyWorldBuildCommand
         //     // extraScriptingDefines = scriptsDefines,
         // });
 
-        var result = BuildPipeline.BuildPlayer(GetScences(), "Builds/Android/android.apk", BuildTarget.Android, BuildOptions.None);
+        var result = BuildPipeline.BuildPlayer(buildOpstions);
 
         PrintGameciResult(result.summary);
     }
