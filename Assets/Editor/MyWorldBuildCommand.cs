@@ -16,6 +16,11 @@ public static class MyWorldBuildCommand
         ApplyAndroid();
     }
 
+    public static void CustomBuildWindows()
+    {
+        ApplyWindows();
+    }
+
     public static void BuildAndroidDevelopment()
     {
         ApplyAndroid(GetScriptingDefines("DevMode", "SERVER_DEVELOPMENT"));
@@ -87,23 +92,31 @@ public static class MyWorldBuildCommand
         {
             options = BuildOptions.Development,
             scenes = GetScences(),
+            locationPathName = "Builds/Windows/windows_app.exe",
+            target = BuildTarget.StandaloneWindows64,
+            targetGroup = BuildTargetGroup.Standalone
+        };
+
+        var result = BuildPipeline.BuildPlayer(buildOpstions);
+
+        PrintGameciResult(result.summary);
+    }
+
+    private static void ApplyWindows()
+    {
+        Console.WriteLine($">>>>>License: {UnityEngine.Windows.LicenseInformation.isOnAppTrial}");
+
+        PlayerSettings.SplashScreen.show = true;
+        PlayerSettings.SplashScreen.showUnityLogo = true;
+
+        BuildPlayerOptions buildOpstions = new()
+        {
+            options = BuildOptions.Development,
+            scenes = GetScences(),
             locationPathName = "Builds/Android/android.apk",
             target = BuildTarget.Android,
             targetGroup = BuildTargetGroup.Android
         };
-
-        // EditorUserBuildSettings.buildAppBundle = true;
-        // PlayerSettings.keystorePass = Environment.GetEnvironmentVariable("ANDROID_KEYSTORE_PASS");
-        // PlayerSettings.keyaliasPass = Environment.GetEnvironmentVariable("ANDROID_KEYALIAS_PASS");
-        // BuildReport result = BuildPipeline.BuildPlayer(new BuildPlayerOptions
-        // {
-        //     locationPathName = "Builds/Android/android.aab",
-        //     scenes = GetScences(),
-        //     target = BuildTarget.Android,
-        //     targetGroup = BuildTargetGroup.Android,
-        //     options = BuildOptions.CompressWithLz4,
-        //     // extraScriptingDefines = scriptsDefines,
-        // });
 
         var result = BuildPipeline.BuildPlayer(buildOpstions);
 
