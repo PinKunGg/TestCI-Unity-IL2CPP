@@ -97,14 +97,14 @@ jobs:
   #         # - unity/return-license
   
   # Window Build 2
-  build-android-window:
-        docker:
-          - image: unityci/editor-windows-2023.1.13f1-windows-il2cpp-3.0.1
-        # executor:
-        #   name: unity/windows-2019
-        #   editor_version: 2023.1.13f1
-        #   resource_class: large
-        #   target_platform: android
+  build-window-il2cpp:
+        # docker:
+        #   - image: unityci/editor-windows-2023.1.13f1-windows-il2cpp-3.0.1
+        executor:
+          name: unity/windows-2019
+          editor_version: 2023.1.13f1
+          resource_class: large
+          target_platform: windows-il2cpp
         steps:
           - setup_remote_docker
           - add_ssh_keys:
@@ -148,7 +148,10 @@ workflows:
           # requires:
           #   - test-android-ubuntu
 
-      - build-android-window:
+      # - build-android-window:
+      #     context: unity
+
+      - build-window-il2cpp:
           context: unity
 
       # Ubuntu/Test-Windows-Mono
