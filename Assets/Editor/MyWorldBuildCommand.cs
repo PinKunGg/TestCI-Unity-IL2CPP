@@ -92,9 +92,9 @@ public static class MyWorldBuildCommand
         {
             options = BuildOptions.Development,
             scenes = GetScences(),
-            locationPathName = "Builds/Windows/windows_app.exe",
-            target = BuildTarget.StandaloneWindows64,
-            targetGroup = BuildTargetGroup.Standalone
+            locationPathName = "Builds/Android/android.apk",
+            target = BuildTarget.Android,
+            targetGroup = BuildTargetGroup.Android
         };
 
         var result = BuildPipeline.BuildPlayer(buildOpstions);
@@ -113,9 +113,9 @@ public static class MyWorldBuildCommand
         {
             options = BuildOptions.Development,
             scenes = GetScences(),
-            locationPathName = "Builds/Android/android.apk",
-            target = BuildTarget.Android,
-            targetGroup = BuildTargetGroup.Android
+            locationPathName = "Builds/Windows/windows_app.exe",
+            target = BuildTarget.StandaloneWindows64,
+            targetGroup = BuildTargetGroup.Standalone
         };
 
         var result = BuildPipeline.BuildPlayer(buildOpstions);
