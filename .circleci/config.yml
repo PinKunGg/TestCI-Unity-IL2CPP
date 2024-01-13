@@ -117,7 +117,7 @@ jobs:
               build-target: StandaloneWindows64
               compress: true
               cache-version: v2.3
-              build-method: 'MyWorldBuildCommand.CustomBuildWindows'
+              # build-method: 'MyWorldBuildCommand.CustomBuildWindows'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
           - store_artifacts:
