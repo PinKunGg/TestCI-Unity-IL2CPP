@@ -76,26 +76,27 @@ jobs:
               name: pull docker
               command: |
                 # docker pull unityci/editor:windows-2023.1.13f1-android-3.0.1
-                docker build . --pull unityci/editor:windows-2023.1.13f1-android-3.0.1
-          - add_ssh_keys:
-              fingerprints:
-                - "c1:1e:1c:e0:f6:68:6a:38:42:a3:88:bd:41:53:4a:d1"
+                # docker build . --pull unityci/editor:windows-2023.1.13f1-android-3.0.1
+                echo docker build --help
+          # - add_ssh_keys:
+          #     fingerprints:
+          #       - "c1:1e:1c:e0:f6:68:6a:38:42:a3:88:bd:41:53:4a:d1"
           - checkout
-          - unity/prepare-env:
-              cache-version: v2.3.1
-          # - unity/test:
-          #     test-platform: "playmode"
-          - unity/build:
-              build-target: Android
-              compress: true
-              cache-version: v2.3.1
-              build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
-              # project-path: "."
-              # build-method: 'GameCIBuildCommand.PerformBuild'
-          - store_artifacts:
-              path: Builds/Android
-              destination: builds
-          - unity/return-license
+          # - unity/prepare-env:
+          #     cache-version: v2.3.1
+          # # - unity/test:
+          # #     test-platform: "playmode"
+          # - unity/build:
+          #     build-target: Android
+          #     compress: true
+          #     cache-version: v2.3.1
+          #     build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
+          #     # project-path: "."
+          #     # build-method: 'GameCIBuildCommand.PerformBuild'
+          # - store_artifacts:
+          #     path: Builds/Android
+          #     destination: builds
+          # - unity/return-license
   
   # Window Build 2
   build-window-il2cpp:
