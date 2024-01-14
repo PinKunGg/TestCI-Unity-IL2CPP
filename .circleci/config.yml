@@ -76,7 +76,7 @@ jobs:
               fingerprints:
                 - "c1:1e:1c:e0:f6:68:6a:38:42:a3:88:bd:41:53:4a:d1"
           - checkout
-          - setup_remote_docker
+          # - setup_remote_docker
           - unity/prepare-env:
               cache-version: v2.3.1
           # # - unity/test:
