@@ -60,6 +60,10 @@ jobs:
 
         steps:
           # - setup_remote_docker
+          - add_ssh_keys:
+              fingerprints:
+                - "c1:1e:1c:e0:f6:68:6a:38:42:a3:88:bd:41:53:4a:d1"
+          - checkout
           - run:
               name: "check docker"
               command: docker info
@@ -72,10 +76,6 @@ jobs:
           #       # docker pull unityci/editor:windows-2023.1.13f1-android-3.0.1
           #       # docker build . --pull unityci/editor:windows-2023.1.13f1-android-3.0.1
           #       docker build --help
-          - add_ssh_keys:
-              fingerprints:
-                - "c1:1e:1c:e0:f6:68:6a:38:42:a3:88:bd:41:53:4a:d1"
-          - checkout
           # - unity/prepare-env:
           #     cache-version: v2.3.1
           # # - unity/test:
