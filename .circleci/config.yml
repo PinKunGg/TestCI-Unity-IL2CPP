@@ -45,14 +45,12 @@ jobs:
         #   target_platform: android
         steps:
           - setup_remote_docker
-          # - add_ssh_keys:
-          #     fingerprints:
-          #       - "70:ad:8c:c9:4c:3e:31:35:3e:85:50:18:23:8d:50:d5"
           - checkout
           - unity/prepare-env:
               cache-version: v2.1
-          # - unity/test:
-          #     test-platform: "playmode"
+          run:
+            name: active license
+            command: /root/.local/share/unity3d/Unity/Unity_lic.ulf -quit -batchmode -serial SC-6YX5-RVNY-XG5E-868Z-NCU3 -username 'nattapat.pinn@gmail.com' -password 'MagicAhri3120_'
           - unity/build:
               build-target: Android
               compress: true
@@ -64,39 +62,42 @@ jobs:
               path: Builds/Android
               destination: builds
           # - unity/return-license
+          run:
+            name: return license
+            command: /root/.local/share/unity3d/Unity/Unity_lic.ulf -quit -batchmode -returnlicense -username 'nattapat.pinn@gmail.com' -password 'MagicAhri3120_'
     
   # Window Android Build 2
-  build-android-window:
-        # docker:
-        #   - image: unityci/editor:windows-2023.1.13f1-android-3.0.1
-        executor:
-          name: windows/default
-        # executor:
-        #   name: unity/windows-2022
-        #   editor_version: 2023.1.13f1
-        #   size: large
-        #   target_platform: android
-        steps:
-          # - setup_remote_docker
-          - add_ssh_keys:
-              fingerprints:
-                - "c1:1e:1c:e0:f6:68:6a:38:42:a3:88:bd:41:53:4a:d1"
-          - checkout
-          - unity/prepare-env:
-              cache-version: v2.3.1
-          # - unity/test:
-          #     test-platform: "playmode"
-          - unity/build:
-              build-target: Android
-              compress: true
-              cache-version: v2.3.1
-              build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
-              # project-path: "."
-              # build-method: 'GameCIBuildCommand.PerformBuild'
-          - store_artifacts:
-              path: Builds/Android
-              destination: builds
-          - unity/return-license
+  # build-android-window:
+  #       # docker:
+  #       #   - image: unityci/editor:windows-2023.1.13f1-android-3.0.1
+  #       executor:
+  #         name: windows/default
+  #       # executor:
+  #       #   name: unity/windows-2022
+  #       #   editor_version: 2023.1.13f1
+  #       #   size: large
+  #       #   target_platform: android
+  #       steps:
+  #         # - setup_remote_docker
+  #         - add_ssh_keys:
+  #             fingerprints:
+  #               - "c1:1e:1c:e0:f6:68:6a:38:42:a3:88:bd:41:53:4a:d1"
+  #         - checkout
+  #         - unity/prepare-env:
+  #             cache-version: v2.3.1
+  #         # - unity/test:
+  #         #     test-platform: "playmode"
+  #         - unity/build:
+  #             build-target: Android
+  #             compress: true
+  #             cache-version: v2.3.1
+  #             build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
+  #             # project-path: "."
+  #             # build-method: 'GameCIBuildCommand.PerformBuild'
+  #         - store_artifacts:
+  #             path: Builds/Android
+  #             destination: builds
+  #         - unity/return-license
   
   # Window Build 2
   build-window-il2cpp:
@@ -134,24 +135,19 @@ jobs:
   #         target_platform: android
   #       steps:
   #         - unity/create-activation-file:
-  #             editor_version: "2022.1.11f1"
+  #             editor_version: "2022.1.11f1"    
 
 workflows:
 
   build:
     jobs:
-      # - create-unity-activation-file
       # - unity/create-activation-file:
       #     editor_version: 2022.1.11f1
-      # - test-android-ubuntu:
-      #     context: unity
-      # - build-android-ubuntu:
-      #     context: unity
-          # requires:
-          #   - test-android-ubuntu
-
-      - build-android-window:
+      - build-android-ubuntu:
           context: unity
+
+      # - build-android-window:
+      #     context: unity
 
       # - build-window-il2cpp:
       #     context: unity
