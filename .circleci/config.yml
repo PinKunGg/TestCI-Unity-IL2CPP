@@ -50,7 +50,7 @@ jobs:
               cache-version: v2.1
           - run:
               name: active license
-              command: /root/.local/share/unity3d/Unity/Unity_lic.ulf -quit -batchmode -serial ${UNITY_SERIAL} -username ${UNITY_USERNAME} -password ${UNITY_PASSWORD}
+              command: '/root/.local/share/unity3d/Unity/Unity_lic.ulf' -quit -batchmode -serial ${UNITY_SERIAL} -username ${UNITY_USERNAME} -password ${UNITY_PASSWORD}
           - unity/build:
               build-target: Android
               compress: true
@@ -64,7 +64,7 @@ jobs:
           # - unity/return-license
           - run:
               name: return license
-              command: /root/.local/share/unity3d/Unity/Unity_lic.ulf -quit -batchmode -returnlicense -username ${UNITY_USERNAME} -password ${UNITY_PASSWORD}
+              command: '/root/.local/share/unity3d/Unity/Unity_lic.ulf' -quit -batchmode -returnlicense -username ${UNITY_USERNAME} -password ${UNITY_PASSWORD}
     
   # Window Android Build 2
   # build-android-window:
@@ -145,9 +145,6 @@ workflows:
       #     editor_version: 2022.1.11f1
       - build-android-ubuntu:
           context: unity
-
-      # - build-android-window:
-      #     context: unity
 
       # - build-window-il2cpp:
       #     context: unity
