@@ -50,14 +50,17 @@ jobs:
   build-android-window:
         executor:
           name: windows/default
-        docker:
-          - image: unityci/editor:windows-2023.1.13f1-android-3.0.1
+        # docker:
+        #   - image: unityci/editor:windows-2023.1.13f1-android-3.0.1
         # executor:
         #   name: unity/windows-2022
         #   editor_version: 2023.1.13f1
         #   size: large
         #   target_platform: android
         steps:
+          - run:
+              name: pull docker
+              command: docker pull unityci/editor:windows-2023.1.13f1-android-3.0.1
           - setup_remote_docker
           - add_ssh_keys:
               fingerprints:
