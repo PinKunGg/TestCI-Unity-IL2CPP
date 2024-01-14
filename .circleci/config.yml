@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   unity: game-ci/unity@1.7.0
-  windows: circleci/windows@2.2.0
+  windows: circleci/windows@5.0.0
 
 jobs:
   runner-test:
@@ -22,8 +22,6 @@ jobs:
 
   # Ubuntu Android Build 2
   build-android-ubuntu:
-        executor:
-          name: windows/default
         docker:
           - image: unityci/editor:ubuntu-2023.1.13f1-android-3.0.1
         # executor:
@@ -105,6 +103,8 @@ jobs:
               # build-method: 'MyWorldBuildCommand.CustomBuildWindows'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
+              - required:
+                  docker
           - store_artifacts:
               path: Builds/Android
               destination: builds
