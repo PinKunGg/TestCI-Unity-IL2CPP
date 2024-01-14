@@ -74,12 +74,9 @@ jobs:
               build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
-              required:
-                - docker
           - store_artifacts:
               path: Builds/Android
               destination: builds
-              
           - unity/return-license
   
   # Window Build 2
@@ -134,3 +131,5 @@ workflows:
 
       - build-android-window:
           context: unity
+          - required:
+                - docker
