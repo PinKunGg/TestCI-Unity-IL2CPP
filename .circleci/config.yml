@@ -50,6 +50,12 @@ jobs:
   build-android-window:
         executor:
           name: windows/default
+        environment:
+          editor_version: 2023.1.13f1
+          change_set: ffeab063bb93
+          base_os: windows
+          target_platform: android
+          image_name: unityci-editor:${editor_version}-${target_platform}
         # docker:
         #   - image: unityci/editor:windows-2023.1.13f1-android-3.0.1
         # executor:
@@ -57,12 +63,20 @@ jobs:
         #   editor_version: 2023.1.13f1
         #   size: large
         #   target_platform: android
+
+        # docker pull unityci/editor:windows-2023.1.13f1-android-3.0.1
+        # docker build . \
+
         steps:
           - run:
               name: pull docker
               command: |
-                docker pull unityci/editor:windows-2023.1.13f1-android-3.0.1
-                docker build
+                docker build . \
+                --file ./images/${base_os}/editor/Dockerfile \
+                -t ${image_name} \
+                --build-arg=version=${editor_version} \
+                --build-arg=changeSet=${change_set} \
+                --build-arg=module=${target_platform}
           - add_ssh_keys:
               fingerprints:
                 - "c1:1e:1c:e0:f6:68:6a:38:42:a3:88:bd:41:53:4a:d1"
