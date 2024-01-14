@@ -66,35 +66,35 @@ jobs:
           # - unity/return-license
     
   # Window Android Build 2
-  # build-android-window:
-  #       docker:
-  #         - image: unityci/editor-windows-2023.1.13f1-android-3
-  #       # executor:
-  #       #   name: unity/windows-2019
-  #       #   editor_version: 2023.1.13f1
-  #       #   resource_class: large
-  #       #   target_platform: android
-  #       steps:
-  #         - setup_remote_docker
-  #         - add_ssh_keys:
-  #             fingerprints:
-  #               - "70:ad:8c:c9:4c:3e:31:35:3e:85:50:18:23:8d:50:d5"
-  #         - checkout
-  #         - unity/prepare-env:
-  #             cache-version: v2.2
-  #         # - unity/test:
-  #         #     test-platform: "playmode"
-  #         - unity/build:
-  #             build-target: Android
-  #             compress: true
-  #             cache-version: v2.2
-  #             build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
-  #             # project-path: "."
-  #             # build-method: 'GameCIBuildCommand.PerformBuild'
-  #         - store_artifacts:
-  #             path: Builds/Android
-  #             destination: builds
-  #         # - unity/return-license
+  build-android-window:
+        docker:
+          - image: unityci/editor:2023.1.13f1-android-3.0.1
+        # executor:
+        #   name: unity/windows-2019
+        #   editor_version: 2023.1.13f1
+        #   resource_class: large
+        #   target_platform: android
+        steps:
+          - setup_remote_docker
+          - add_ssh_keys:
+              fingerprints:
+                - "70:ad:8c:c9:4c:3e:31:35:3e:85:50:18:23:8d:50:d5"
+          - checkout
+          - unity/prepare-env:
+              cache-version: v2.2
+          # - unity/test:
+          #     test-platform: "playmode"
+          - unity/build:
+              build-target: Android
+              compress: true
+              cache-version: v2.2
+              build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
+              # project-path: "."
+              # build-method: 'GameCIBuildCommand.PerformBuild'
+          - store_artifacts:
+              path: Builds/Android
+              destination: builds
+          # - unity/return-license
   
   # Window Build 2
   build-window-il2cpp:
@@ -148,11 +148,11 @@ workflows:
           # requires:
           #   - test-android-ubuntu
 
-      # - build-android-window:
-      #     context: unity
-
-      - build-window-il2cpp:
+      - build-android-window:
           context: unity
+
+      # - build-window-il2cpp:
+      #     context: unity
 
       # Ubuntu/Test-Windows-Mono
       # - unity/test:
