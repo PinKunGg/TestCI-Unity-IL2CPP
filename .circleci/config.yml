@@ -64,9 +64,11 @@ jobs:
           - run:
               name: "check docker"
               shell: powershell.exe
-              command: |
-                docker info
-                docker run -it unityci/editor:windows-2023.1.13f1-android-3.0.1 cmd.exe
+              command: docker info
+          - run:
+              name: "docker run"
+              shell: powershell.exe
+              command: docker run -it mcr.microsoft.com/windows/nanoserver:ltsc2022 cmd.exe
           # - run:
           #     name: pull docker
           #     command: |
