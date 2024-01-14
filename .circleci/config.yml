@@ -48,15 +48,15 @@ jobs:
     
   # Window Android Build 2
   build-android-window:
-        docker:
-          - image: unityci/editor:windows-2023.1.13f1-android-3.0.1
-        # executor:
-        #   name: unity/windows-2022
-        #   editor_version: 2023.1.13f1
-        #   size: large
-        #   target_platform: android
+        # docker:
+        #   - image: unityci/editor:windows-2023.1.13f1-android-3.0.1
+        executor:
+          name: unity/windows-2022
+          editor_version: 2023.1.13f1
+          size: large
+          target_platform: android
         steps:
-          - setup_remote_docker
+          # - setup_remote_docker
           - add_ssh_keys:
               fingerprints:
                 - "c1:1e:1c:e0:f6:68:6a:38:42:a3:88:bd:41:53:4a:d1"
