@@ -103,8 +103,6 @@ jobs:
               # build-method: 'MyWorldBuildCommand.CustomBuildWindows'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
-              - required:
-                  docker
           - store_artifacts:
               path: Builds/Android
               destination: builds
@@ -133,3 +131,5 @@ workflows:
 
       - build-android-window:
           context: unity
+          - requires:
+            - docker
