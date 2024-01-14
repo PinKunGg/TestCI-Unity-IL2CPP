@@ -45,6 +45,15 @@ jobs:
               path: Builds/Android
               destination: builds
           - unity/return-license
+
+  windows-spin-up-env:
+        executor:
+          name: windows/default
+        steps:
+          - add_ssh_keys:
+              fingerprints:
+                - "c1:1e:1c:e0:f6:68:6a:38:42:a3:88:bd:41:53:4a:d1"
+          - checkout
     
   # Window Android Build 2
   build-android-window:
@@ -143,6 +152,9 @@ workflows:
 
       # - build-window-il2cpp:
       #     context: unity
-
+      
+      - windows-spin-up-env
       - build-android-window:
           context: unity
+          requires:
+            - windows-spin-up-env
