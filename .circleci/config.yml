@@ -60,7 +60,7 @@ jobs:
         #   target_platform: android
 
         steps:
-          - setup_remote_docker
+          # - setup_remote_docker
           - run:
               name: "check docker"
               shell: powershell.exe
