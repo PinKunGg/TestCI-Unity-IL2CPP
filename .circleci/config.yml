@@ -134,5 +134,3 @@ workflows:
 
       - build-android-window:
           context: unity
-          requires:
-            - docker
