@@ -69,7 +69,7 @@ jobs:
               command: docker info
           - run:
               name: "docker run"
-              command: docker run -it mcr.microsoft.com/windows/nanoserver:ltsc2022 cmd.exe
+              command: winpty docker run -it mcr.microsoft.com/windows/nanoserver:ltsc2022 cmd.exe
           # - run:
           #     name: pull docker
           #     command: |
