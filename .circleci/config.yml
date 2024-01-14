@@ -68,7 +68,7 @@ jobs:
   # Window Android Build 2
   build-android-window:
         docker:
-          - image: unityci/editor:windows-2023.1.13f1-android-3.0.1
+          - image: unityci/editor:2023.1.13f1-android-3.0.1
         # executor:
         #   name: unity/windows-2019
         #   editor_version: 2023.1.13f1
