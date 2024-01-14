@@ -50,8 +50,9 @@ jobs:
   build-android-window:
         executor:
           name: windows/default
-        docker:
-          - image: unityci/editor:windows-2023.1.13f1-android-3.0.1
+          shell: powershell.exe
+        # docker:
+        #   - image: unityci/editor:windows-2023.1.13f1-android-3.0.1
         # executor:
         #   name: unity/windows-2022
         #   editor_version: 2023.1.13f1
@@ -60,6 +61,12 @@ jobs:
 
         steps:
           - setup_remote_docker
+          - run:
+              name: "check docker"
+              shell: powershell.exe
+              command: |
+                docker info
+                docker run -it unityci/editor:windows-2023.1.13f1-android-3.0.1 cmd.exe
           # - run:
           #     name: pull docker
           #     command: |
