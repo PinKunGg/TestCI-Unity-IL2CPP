@@ -63,8 +63,9 @@ jobs:
         #       windowsAMI: "unityci/editor:windows-2023.1.13f1-android-3.0.1"
         executor:
           name: windows/default
-        # docker:
-        #   - image: unityci/editor:windows-2023.1.13f1-android-3.0.1
+        docker:
+          - image: unityci/editor:windows-2023.1.13f1-android-3.0.1
+          - command: - SwitchDaemon
         # executor:
         #   name: unity/windows-2022
         #   editor_version: 2023.1.13f1
@@ -75,22 +76,22 @@ jobs:
               fingerprints:
                 - "c1:1e:1c:e0:f6:68:6a:38:42:a3:88:bd:41:53:4a:d1"
           - checkout
-          - run:
-              name: "docker setup"
-              command: |
-                # docker pull unityci/editor:windows-2023.1.13f1-android-3.0.1
-                docker run -it unityci/editor:windows-2023.1.13f1-android-3.0.1 cmd.exe
-              timeout: 1h
+          # - run:
+          #     name: "docker setup"
+          #     command: |
+          #       docker pull unityci/editor:windows-2023.1.13f1-android-3.0.1
+          #       docker run -it unityci/editor:windows-2023.1.13f1-android-3.0.1 cmd.exe
+          #     timeout: 1h
           # - setup_remote_docker
-          # - unity/prepare-env:
-          #     cache-version: v2.3.1
+          - unity/prepare-env:
+              cache-version: v2.3.1
           # # - unity/test:
           # #     test-platform: "playmode"
-          # - unity/build:
-          #     build-target: Android
-          #     compress: true
-          #     cache-version: v2.3.1
-          #     build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
+          - unity/build:
+              build-target: Android
+              compress: true
+              cache-version: v2.3.1
+              build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
           # - store_artifacts:
