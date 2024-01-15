@@ -32,7 +32,8 @@ jobs:
   # Window Android Build 2
   build-android-window:
         executor:
-          name: windows/default
+          # name: windows/default
+          name: docker/machine
         # docker:
         #   - image: cimg/base:2024.01
         #   - image: unityci/editor:ubuntu-2023.1.13f1-android-3.0.1
@@ -44,11 +45,9 @@ jobs:
           - run:
               name: check docker
               command: docker version
-          - run:
-              name: "docker setup"
-              command: |
-                docker pull unityci/editor:windows-2023.1.13f1-android-3.0.1
-                setup_remote_docker
+          - docker/pull:
+              images: unityci/editor:ubuntu-2023.1.13f1-android-3.0.1
+              ignore-docker-pull-error: true
           - run:
               name: check docker after pull
               command: docker version
@@ -103,12 +102,12 @@ workflows:
   #     - build-android-ubuntu:
   #         context: unity
 
-  # build-android-2:
-  #   jobs:
-  #     - build-android-window:
-  #         context: unity
-  
-  build-windows:
+  build-android-2:
     jobs:
-      - build-window-il2cpp:
+      - build-android-window:
           context: unity
+  
+  # build-windows:
+  #   jobs:
+  #     - build-window-il2cpp:
+  #         context: unity
