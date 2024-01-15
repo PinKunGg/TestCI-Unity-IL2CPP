@@ -19,12 +19,12 @@ jobs:
           - checkout
           # - setup_remote_docker
           - unity/prepare-env
-              # cache-version: v3.android
+              cache-version: v3.android
           - unity/build:
               build-target: Android
               compress: true
-              # cache-version: v3.android
-              # build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
+              cache-version: v3.android
+              build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
           # - unity/return-license
