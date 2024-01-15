@@ -36,9 +36,6 @@ jobs:
           - unity/prepare-env:
               cache-version: v2.1
           - unity/build:
-              unity-license-var-name: 'UNITY_ENCODED_LICENSE'
-              unity-username-var-name: 'UNITY_USERNAME'
-              unity-password-var-name: 'UNITY_PASSWORD'
               build-target: Android
               compress: true
               cache-version: v2.1
@@ -119,9 +116,6 @@ jobs:
           - unity/prepare-env:
               cache-version: v2.3
           - unity/build:
-              unity-license-var-name: 'UNITY_ENCODED_LICENSE'
-              unity-username-var-name: 'UNITY_USERNAME'
-              unity-password-var-name: 'UNITY_PASSWORD'
               build-target: StandaloneWindows64
               compress: true
               cache-version: v2.3
