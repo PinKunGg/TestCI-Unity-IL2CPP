@@ -42,12 +42,18 @@ jobs:
               fingerprints:
                 - "65:46:11:49:bf:17:01:02:d9:d3:d9:8b:b4:97:f2:c7"
           - checkout
+          - docker/install-docker-tools
+          - run:
+              name: switch docker container
+              command: & $Env:ProgramFiles\Docker\Docker\DockerCli.exe -SwitchDaemon
           - run:
               name: check docker
               command: docker version
           - docker/pull:
               images: unityci/editor:windows-2023.1.13f1-android-3.0.1
               ignore-docker-pull-error: true
+          - docker/install
+
           - run:
               name: check docker after pull
               command: docker version
