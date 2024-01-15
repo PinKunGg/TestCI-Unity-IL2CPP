@@ -156,11 +156,11 @@ workflows:
       # - build-android-ubuntu:
       #     context: unity
 
-      - build-window-il2cpp:
-          context: unity
+      # - build-window-il2cpp:
+      #     context: unity
       
       # - windows-spin-up-env
-      # - build-android-window:
-      #     context: unity
+      - build-android-window:
+          context: unity
           # requires:
           #   - windows-spin-up-env
