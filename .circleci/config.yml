@@ -83,13 +83,13 @@ jobs:
           #     timeout: 1h
           - setup_remote_docker
           - unity/prepare-env:
-              cache-version: v2.3.1
+              cache-version: v2.3.2
           # # # - unity/test:
           # # #     test-platform: "playmode"
           - unity/build:
               build-target: Android
               compress: true
-              cache-version: v2.3.1
+              cache-version: v2.3.2
               # build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
           #     project-path: "."
           #     build-method: 'GameCIBuildCommand.PerformBuild'
