@@ -93,7 +93,7 @@ jobs:
           # - setup_remote_docker
           - add_ssh_keys:
               fingerprints:
-                - "c1:1e:1c:e0:f6:68:6a:38:42:a3:88:bd:41:53:4a:d1"
+                - "	65:46:11:49:bf:17:01:02:d9:d3:d9:8b:b4:97:f2:c7"
           - checkout
           - unity/prepare-env:
               cache-version: v2.win
