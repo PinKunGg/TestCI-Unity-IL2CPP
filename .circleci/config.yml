@@ -125,7 +125,7 @@ workflows:
   # create-activation:
   #   jobs:
       - unity/create-activation-file
-          editor_version: '2023.1.13'
+          editor_version: 2023.1.13f1
 
   # build-android:
   #   jobs:
