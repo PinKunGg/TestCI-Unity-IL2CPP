@@ -64,11 +64,11 @@ jobs:
         #       windowsAMI: "unityci/editor:windows-2023.1.13f1-android-3.0.1"
         # executor:
         #   name: docker/machine
-        # docker:
+        docker:
           # - image: cimg/base:2024.01
-          # - image: unityci/editor:ubuntu-2023.1.13f1-android-3.0.1
-        machine: 
-          image: ubuntu-2204:current
+          - image: unityci/editor:ubuntu-2023.1.13f1-android-3.0.1
+        # machine: 
+        #   image: ubuntu-2204:current
         # executor:
         #   name: unity/windows-2022
         #   editor_version: 2023.1.13f1
@@ -90,7 +90,7 @@ jobs:
           #       docker pull unityci/editor:windows-2023.1.13f1-android-3.0.1
           #       docker run -it unityci/editor:windows-2023.1.13f1-android-3.0.1 cmd.exe
           #     timeout: 1h
-          # - setup_remote_docker
+          - setup_remote_docker
           - unity/prepare-env:
               cache-version: v2.3.1
           # # # - unity/test:
@@ -105,7 +105,7 @@ jobs:
           # - store_artifacts:
           #     path: Builds/Android
           #     destination: builds
-          # - unity/return-license
+          - unity/return-license
   
   # Window Build 2
   build-window-il2cpp:
@@ -134,7 +134,7 @@ jobs:
           - store_artifacts:
               path: Builds/Android
               destination: builds
-          # - unity/return-license
+          - unity/return-license
 
   # create-unity-activation-file:
   #       executor:
@@ -154,11 +154,11 @@ workflows:
       # - build-android-ubuntu:
       #     context: unity
 
-      # - build-window-il2cpp:
-      #     context: unity
+      - build-window-il2cpp:
+          context: unity
       
       # - windows-spin-up-env
-      - build-android-window:
-          context: unity
+      # - build-android-window:
+      #     context: unity
           # requires:
           #   - windows-spin-up-env
