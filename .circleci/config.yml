@@ -146,19 +146,22 @@ jobs:
   #             editor_version: "2022.1.11f1"    
 
 workflows:
-  build:
+  create-activation:
     jobs:
-      # - unity/create-activation-file:
-      #     editor_version: 2022.1.11f1
-
-      # - build-android-ubuntu:
-      #     context: unity
-
-      # - build-window-il2cpp:
-      #     context: unity
+      - unity/create-activation-file
+          # editor_version: 2022.1.11f1
+  # build-android:
+  #   jobs:
+  #     - build-android-ubuntu:
+  #         context: unity
       
-      # - windows-spin-up-env
-      - build-android-window:
-          context: unity
-          # requires:
-          #   - windows-spin-up-env
+  #     # - windows-spin-up-env
+  #     # - build-android-window:
+  #         # context: unity
+  #         # requires:
+  #         #   - windows-spin-up-env
+  
+  # build-windows:
+  #   jobs:
+  #     - build-window-il2cpp:
+  #         context: unity
