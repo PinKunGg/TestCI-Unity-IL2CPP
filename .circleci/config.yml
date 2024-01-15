@@ -34,7 +34,7 @@ jobs:
         # executor:
           # name: windows/default
           # name: docker/machine
-        machine:
+        machine: true
           image: ubuntu-2204:2023.10.1
         resource_class: large
         # docker:
