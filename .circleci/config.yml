@@ -62,8 +62,8 @@ jobs:
         #   providers:
         #     ec2:
         #       windowsAMI: "unityci/editor:windows-2023.1.13f1-android-3.0.1"
-        executor:
-          name: windows/default
+        # executor:
+        #   name: windows/default
         docker:
           # - image: cimg/base:2024.01
           - image: unityci/editor:ubuntu-2023.1.13f1-android-3.0.1
