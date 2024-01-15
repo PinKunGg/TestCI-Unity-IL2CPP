@@ -18,7 +18,7 @@ jobs:
         steps:
           - checkout
           # - setup_remote_docker
-          - unity/prepare-env:
+          - unity/prepare-env
               # cache-version: v3.android
           - unity/build:
               build-target: Android
