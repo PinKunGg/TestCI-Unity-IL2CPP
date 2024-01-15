@@ -77,12 +77,12 @@ jobs:
               build-target: StandaloneWindows64
               compress: true
               cache-version: v3.win
-              build-method: 'MyWorldBuildCommand.CustomBuildWindows'
+              # build-method: 'MyWorldBuildCommand.CustomBuildWindows'
               # project-path: "."
-              # build-method: 'GameCIBuildCommand.PerformBuild'
+              build-method: 'GameCIBuildCommand.PerformBuild'
           # - unity/return-license
-          - store_artifacts:
-              path: Builds/Windows
+          # - store_artifacts:
+          #     path: Builds/Windows
           #     destination: builds
 
 workflows:
@@ -91,17 +91,17 @@ workflows:
       # - unity/create-activation-file:
           # editor_version: 2022.1.11f1
 
-  # build-android:
-  #   jobs:
-  #     - build-android-ubuntu:
-  #         context: unity
+  build-android:
+    jobs:
+      - build-android-ubuntu:
+          context: unity
 
   # build-android-2:
   #   jobs:
   #     - build-android-window:
   #         context: unity
   
-  build-windows:
-    jobs:
-      - build-window-il2cpp:
-          context: unity
+  # build-windows:
+  #   jobs:
+  #     - build-window-il2cpp:
+  #         context: unity
