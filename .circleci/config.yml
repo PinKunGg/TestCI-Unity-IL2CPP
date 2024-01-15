@@ -6,33 +6,18 @@ orbs:
   docker: circleci/docker@2.4.0
 
 jobs:
-  runner-test:
-    machine: true
-    resource_class: owaowa/test
-    steps:
-      - run: echo "Hi I'm on Runners!"
-  testjob:
-    executor:
-      name: windows/default
-    steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "70:ad:8c:c9:4c:3e:31:35:3e:85:50:18:23:8d:50:d5"
-      - checkout
-      - run: echo "Ha Ha!"
-
   # Ubuntu Android Build 2
   build-android-ubuntu:
-        # docker:
-        #   - image: unityci/editor:ubuntu-2023.1.13f1-android-3.0.1
-        executor:
-          name: unity/ubuntu
-          editor_version: 2023.1.13f1
-          resource_class: large
-          target_platform: android
+        docker:
+          - image: unityci/editor:ubuntu-2023.1.13f1-android-3.0.1
+        # executor:
+        #   name: unity/ubuntu
+        #   editor_version: 2023.1.13f1
+        #   resource_class: large
+        #   target_platform: android
         steps:
-          # - setup_remote_docker
           - checkout
+          - setup_remote_docker
           - unity/prepare-env:
               cache-version: v2.android
           - unity/build:
@@ -139,17 +124,17 @@ workflows:
   #     - unity/create-activation-file
   #         # editor_version: 2022.1.11f1
 
-  # build-android:
-  #   jobs:
-  #     - build-android-ubuntu:
-  #         context: unity
+  build-android:
+    jobs:
+      - build-android-ubuntu:
+          context: unity
 
   # build-android-2:
   #   jobs:
   #     - build-android-window:
   #         context: unity
   
-  build-windows:
-    jobs:
-      - build-window-il2cpp:
-          context: unity
+  # build-windows:
+  #   jobs:
+  #     - build-window-il2cpp:
+  #         context: unity
