@@ -112,19 +112,11 @@ jobs:
               destination: Builds
           # - unity/return-license
 
-  create-unity-activation-file:
-        docker:
-          - image: editor-ubuntu-2023.1.13f1-base-3.0.1
-        steps:
-          - checkout
-          - setup_remote_docker
-          - unity/create-activation-file:
-              editor_version: "2023.1.13f1"    
-
 workflows:
   create-activation:
     jobs:
-      - create-unity-activation-file
+      - unity/create-activation-file:
+          editor_version: 2022.1.11f1
 
   # build-android:
   #   jobs:
