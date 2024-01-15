@@ -31,30 +31,17 @@ jobs:
     
   # Window Android Build 2
   build-android-window:
-        executor:
+        # executor:
           # name: windows/default
-          name: docker/machine
-        # docker:
+          # name: docker/machine
+        docker:
         #   - image: cimg/base:2024.01
-        #   - image: unityci/editor:ubuntu-2023.1.13f1-android-3.0.1
+          - image: unityci/editor:windows-2023.1.13f1-android-3.0.1
         steps:
           - add_ssh_keys:
               fingerprints:
                 - "65:46:11:49:bf:17:01:02:d9:d3:d9:8b:b4:97:f2:c7"
           - checkout
-          - docker/install-docker-tools
-          - run:
-              name: switch to window engine
-              command: -SwitchWindowsEngine
-          - run:
-              name: check docker
-              command: docker version
-          - docker/pull:
-              images: unityci/editor:windows-2023.1.13f1-android-3.0.1
-              ignore-docker-pull-error: true
-          - run:
-              name: check docker after pull
-              command: docker version
           # - unity/prepare-env:
           #     cache-version: v2.3.2
           # - unity/build:
@@ -94,6 +81,9 @@ jobs:
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
           # - unity/return-license
+          - store_artifacts:
+              path: Builds/Windows
+          #     destination: builds
 
 workflows:
   # create-activation:
@@ -106,12 +96,12 @@ workflows:
   #     - build-android-ubuntu:
   #         context: unity
 
-  build-android-2:
-    jobs:
-      - build-android-window:
-          context: unity
-  
-  # build-windows:
+  # build-android-2:
   #   jobs:
-  #     - build-window-il2cpp:
+  #     - build-android-window:
   #         context: unity
+  
+  build-windows:
+    jobs:
+      - build-window-il2cpp:
+          context: unity
