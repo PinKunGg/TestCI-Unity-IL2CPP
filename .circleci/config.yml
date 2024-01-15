@@ -122,7 +122,7 @@ jobs:
           - store_artifacts:
               path: Builds/Android
               destination: builds
-          - unity/return-license
+          # - unity/return-license
 
   # create-unity-activation-file:
   #       executor:
@@ -139,17 +139,17 @@ workflows:
   #     - unity/create-activation-file
   #         # editor_version: 2022.1.11f1
 
-  # build-android:
-  #   jobs:
-  #     - build-android-ubuntu:
-  #         context: unity
+  build-android:
+    jobs:
+      - build-android-ubuntu:
+          context: unity
 
   # build-android-2:
   #   jobs:
   #     - build-android-window:
   #         context: unity
   
-  build-windows:
-    jobs:
-      - build-window-il2cpp:
-          context: unity
+  # build-windows:
+  #   jobs:
+  #     - build-window-il2cpp:
+  #         context: unity
