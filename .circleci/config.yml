@@ -34,10 +34,10 @@ jobs:
         # executor:
           # name: windows/default
           # name: docker/machine
-        # machine:
-          # image: ubuntu-2204:current
-        docker:
-          - image: cimg/base:2024.01
+        machine:
+          image: ubuntu-2204:current
+        # docker:
+          # - image: cimg/base:2024.01
           # - image: unityci/editor:windows-2023.1.13f1-android-3.0.1
         working_directory: ~/build
         steps:
