@@ -19,14 +19,11 @@ jobs:
           - checkout
           - setup_remote_docker
           - unity/prepare-env:
-              cache-version: v2.android
-          - run:
-              name: active license
-              command: /root/.local/share/unity3d/Unity/Unity_lic.ulf -batchmode -manualLicenseFile /root/.local/share/unity3d/Unity/Unity_lic.ulf -logfile
+              cache-version: v3.android
           - unity/build:
               build-target: Android
               compress: true
-              cache-version: v2.android
+              cache-version: v3.android
               # build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
@@ -99,11 +96,11 @@ jobs:
                 - "65:46:11:49:bf:17:01:02:d9:d3:d9:8b:b4:97:f2:c7"
           - checkout
           - unity/prepare-env:
-              cache-version: v2.win
+              cache-version: v3.win
           - unity/build:
               build-target: StandaloneWindows64
               compress: true
-              cache-version: v2.win
+              cache-version: v3.win
               build-method: 'MyWorldBuildCommand.CustomBuildWindows'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
@@ -113,15 +110,15 @@ jobs:
           # - unity/return-license
 
 workflows:
-  create-activation:
-    jobs:
-      - unity/create-activation-file:
-          editor_version: 2022.1.11f1
+  # create-activation:
+    # jobs:
+      # - unity/create-activation-file:
+          # editor_version: 2022.1.11f1
 
-  # build-android:
-  #   jobs:
-  #     - build-android-ubuntu:
-  #         context: unity
+  build-android:
+    jobs:
+      - build-android-ubuntu:
+          context: unity
 
   # build-android-2:
   #   jobs:
