@@ -39,8 +39,9 @@ jobs:
           # image: ubuntu-2004:202010-01 # # recommended linux image - includes Ubuntu 20.04, docker 19.03.13, docker-compose 1.27.4
         resource_class: large
         docker:
-          - image: cimg/base:2024.01
+          # - image: cimg/base:2024.01
           # - image: unityci/editor:windows-2023.1.13f1-android-3.0.1
+          - image: unityci/editor:ubuntu-2023.1.13f1-android-3.0.1
         steps:
           # - add_ssh_keys:
           #     fingerprints:
