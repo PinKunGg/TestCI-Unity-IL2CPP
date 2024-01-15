@@ -34,6 +34,7 @@ jobs:
         executor:
           # name: windows/default
           name: docker/machine
+          command: -SwitchWindowsEngine
         # docker:
         #   - image: cimg/base:2024.01
         #   - image: unityci/editor:ubuntu-2023.1.13f1-android-3.0.1
@@ -44,15 +45,11 @@ jobs:
           - checkout
           - docker/install-docker-tools
           - run:
-              name: switch docker container
-              command: $Env:ProgramFiles\Docker\Docker\DockerCli.exe -SwitchDaemon
-          - run:
               name: check docker
               command: docker version
           - docker/pull:
               images: unityci/editor:windows-2023.1.13f1-android-3.0.1
               ignore-docker-pull-error: true
-
           - run:
               name: check docker after pull
               command: docker version
