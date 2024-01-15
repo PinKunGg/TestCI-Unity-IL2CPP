@@ -31,12 +31,12 @@ jobs:
     
   # Window Android Build 2
   build-android-window:
-        # executor:
+        executor:
           # name: windows/default
-          # name: docker/machine
-        machine:
+          name: docker/machine
+        # machine:
           # image: ubuntu-2204:current
-          image: ubuntu-2004:202010-01 # # recommended linux image - includes Ubuntu 20.04, docker 19.03.13, docker-compose 1.27.4
+          # image: ubuntu-2004:202010-01 # # recommended linux image - includes Ubuntu 20.04, docker 19.03.13, docker-compose 1.27.4
         resource_class: large
         # docker:
           # - image: cimg/base:2024.01
