@@ -23,29 +23,26 @@ jobs:
 
   # Ubuntu Android Build 2
   build-android-ubuntu:
-        docker:
-          - image: unityci/editor:ubuntu-2023.1.13f1-android-3.0.1
-        # executor:
-        #   name: unity/ubuntu
-        #   editor_version: 2023.1.13f1
-        #   resource_class: large
-        #   target_platform: android
+        # docker:
+        #   - image: unityci/editor:ubuntu-2023.1.13f1-android-3.0.1
+        executor:
+          name: unity/ubuntu
+          editor_version: 2023.1.13f1
+          resource_class: large
+          target_platform: android
         steps:
-          - setup_remote_docker
+          # - setup_remote_docker
           - checkout
           - unity/prepare-env:
-              cache-version: v2.1
+              cache-version: v2.android
           - unity/build:
               build-target: Android
               compress: true
-              cache-version: v2.1
-              build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
+              cache-version: v2.android
+              # build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
-          - store_artifacts:
-              path: Builds/Android
-              destination: builds
-          - unity/return-license
+          # - unity/return-license
     
   # Window Android Build 2
   build-android-window:
@@ -119,7 +116,7 @@ jobs:
               build-target: StandaloneWindows64
               compress: true
               cache-version: v2.win
-              # build-method: 'MyWorldBuildCommand.CustomBuildWindows'
+              build-method: 'MyWorldBuildCommand.CustomBuildWindows'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
           - store_artifacts:
@@ -146,9 +143,6 @@ workflows:
   #   jobs:
   #     - build-android-ubuntu:
   #         context: unity
-  
-      # - build-android-window:
-      #     context: unity
 
   # build-android-2:
   #   jobs:
