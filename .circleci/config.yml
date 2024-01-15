@@ -46,8 +46,9 @@ jobs:
               command: docker version
           - run:
               name: "docker setup"
-              command: docker pull unityci/editor:windows-2023.1.13f1-android-3.0.1
-          - setup_remote_docker
+              command: |
+                docker pull unityci/editor:windows-2023.1.13f1-android-3.0.1
+                setup_remote_docker
           - run:
               name: check docker after pull
               command: docker version
