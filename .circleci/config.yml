@@ -3,7 +3,7 @@ version: 2.1
 orbs:
   unity: game-ci/unity@1.7.0
   windows: circleci/windows@5.0.0
-  docker: circleci/docker@2.4.0
+  # docker: circleci/docker@2.4.0
 
 jobs:
   # Ubuntu Android Build 2
@@ -31,15 +31,15 @@ jobs:
     
   # Window Android Build 2
   build-android-window:
-        executor:
+        # executor:
           # name: windows/default
-          name: docker/machine
+          # name: docker/machine
         # machine:
           # image: ubuntu-2204:current
           # image: ubuntu-2004:202010-01 # # recommended linux image - includes Ubuntu 20.04, docker 19.03.13, docker-compose 1.27.4
         resource_class: large
-        # docker:
-          # - image: cimg/base:2024.01
+        docker:
+          - image: cimg/base:2024.01
           # - image: unityci/editor:windows-2023.1.13f1-android-3.0.1
         steps:
           # - add_ssh_keys:
@@ -52,11 +52,13 @@ jobs:
           # - run:
           #     name: Run Docker
           #     command: docker run -d --name win-docker -p 8080:80 unityci/editor:windows-2023.1.13f1-android-3.0.1
-          # - setup_remote_docker
-          - unity/prepare-env
+          - setup_remote_docker
+          - unity/prepare-env:
+              cache-version: v3.android.window
           - unity/build:
               build-target: Android
               compress: true
+              cache-version: v3.android.window
               # build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
           #     project-path: "."
           #     build-method: 'GameCIBuildCommand.PerformBuild'
