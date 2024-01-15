@@ -3,6 +3,7 @@ version: 2.1
 orbs:
   unity: game-ci/unity@1.7.0
   windows: circleci/windows@5.0.0
+  docker: circleci/docker@2.4.0
 
 jobs:
   runner-test:
@@ -61,11 +62,10 @@ jobs:
         #   providers:
         #     ec2:
         #       windowsAMI: "unityci/editor:windows-2023.1.13f1-android-3.0.1"
-        # executor:
-        #   name: windows/default
-        docker:
-          - image: unityci/editor:windows-2023.1.13f1-android-3.0.1
-              requires: windows/default
+        executor:
+          name: docker/machine
+        # docker:
+        #   - image: unityci/editor:windows-2023.1.13f1-android-3.0.1
         # executor:
         #   name: unity/windows-2022
         #   editor_version: 2023.1.13f1
@@ -76,6 +76,11 @@ jobs:
               fingerprints:
                 - "c1:1e:1c:e0:f6:68:6a:38:42:a3:88:bd:41:53:4a:d1"
           - checkout
+          - docker/pull:
+              images: unityci/editor:windows-2023.1.13f1-android-3.0.1
+          - run:
+              name: check docker
+              command: docker version
           # - run:
           #     name: "docker setup"
           #     command: |
@@ -83,15 +88,15 @@ jobs:
           #       docker run -it unityci/editor:windows-2023.1.13f1-android-3.0.1 cmd.exe
           #     timeout: 1h
           # - setup_remote_docker
-          - unity/prepare-env:
-              cache-version: v2.3.1
-          # # - unity/test:
-          # #     test-platform: "playmode"
-          - unity/build:
-              build-target: Android
-              compress: true
-              cache-version: v2.3.1
-              build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
+          # - unity/prepare-env:
+          #     cache-version: v2.3.1
+          # # # - unity/test:
+          # # #     test-platform: "playmode"
+          # - unity/build:
+          #     build-target: Android
+          #     compress: true
+          #     cache-version: v2.3.1
+          #     build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
           # - store_artifacts:
