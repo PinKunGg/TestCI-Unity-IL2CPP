@@ -90,9 +90,6 @@ jobs:
               build-method: 'MyWorldBuildCommand.CustomBuildWindows'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
-          - store_artifacts:
-              path: Builds/Windows
-              destination: Builds
           # - unity/return-license
 
 workflows:
@@ -106,12 +103,12 @@ workflows:
   #     - build-android-ubuntu:
   #         context: unity
 
-  build-android-2:
-    jobs:
-      - build-android-window:
-          context: unity
-  
-  # build-windows:
+  # build-android-2:
   #   jobs:
-  #     - build-window-il2cpp:
+  #     - build-android-window:
   #         context: unity
+  
+  build-windows:
+    jobs:
+      - build-window-il2cpp:
+          context: unity
