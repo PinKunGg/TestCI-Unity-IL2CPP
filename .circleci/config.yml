@@ -35,7 +35,9 @@ jobs:
           # name: windows/default
           # name: docker/machine
         machine:
-          image: ubuntu-2204:current
+          # image: ubuntu-2204:current
+          image: ubuntu-2004:202010-01 # # recommended linux image - includes Ubuntu 20.04, docker 19.03.13, docker-compose 1.27.4
+        resource_class: large
         # docker:
           # - image: cimg/base:2024.01
           # - image: unityci/editor:windows-2023.1.13f1-android-3.0.1
@@ -44,9 +46,6 @@ jobs:
           #     fingerprints:
           #       - "65:46:11:49:bf:17:01:02:d9:d3:d9:8b:b4:97:f2:c7"
           - checkout
-          - run:
-              name: chown
-              command: chown -R $USER:$USER
           # - run:
           #     name: Pull Docker
           #     command: docker pull unityci/editor:windows-2023.1.13f1-android-3.0.1
