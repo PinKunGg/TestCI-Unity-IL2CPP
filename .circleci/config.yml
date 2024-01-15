@@ -99,7 +99,7 @@ jobs:
               build-target: Android
               compress: true
               cache-version: v2.3.1
-              build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
+              # build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
           #     project-path: "."
           #     build-method: 'GameCIBuildCommand.PerformBuild'
           # - store_artifacts:
@@ -160,7 +160,5 @@ workflows:
       # - windows-spin-up-env
       - build-android-window:
           context: unity
-          - required:
-|             - docker
           # requires:
           #   - windows-spin-up-env
