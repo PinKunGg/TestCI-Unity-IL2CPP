@@ -2,19 +2,19 @@ version: 2.1
 
 orbs:
   unity: game-ci/unity@1.7.0
-  # windows: circleci/windows@5.0.0
+  windows: circleci/windows@5.0.0
   # docker: circleci/docker@2.4.0
 
 jobs:
   # Ubuntu Android Build 2
   build-android-ubuntu:
-        # docker:
-        #   - image: unityci/editor:ubuntu-2023.1.13f1-android-3.0.1
-        executor:
-          name: unity/ubuntu
-          editor_version: 2023.1.13f1
-          resource_class: xlarge
-          target_platform: android
+        docker:
+          - image: unityci/editor:ubuntu-2023.1.13f1-android-3.0.1
+        # executor:
+        #   name: unity/ubuntu
+        #   editor_version: 2023.1.13f1
+        #   resource_class: large
+        #   target_platform: android
         steps:
           - checkout
           - setup_remote_docker
@@ -31,17 +31,26 @@ jobs:
     
   # Window Android Build 2
   build-android-window:
-        # executor:
-          # name: windows/default
+        executor:
+          name: windows/default
           # name: docker/machine
-        docker:
-        #   - image: cimg/base:2024.01
-          - image: unityci/editor:windows-2023.1.13f1-android-3.0.1
+        # docker:
+          # - image: cimg/base:2024.01
+          # - image: unityci/editor:windows-2023.1.13f1-android-3.0.1
         steps:
           - add_ssh_keys:
               fingerprints:
                 - "65:46:11:49:bf:17:01:02:d9:d3:d9:8b:b4:97:f2:c7"
           - checkout
+          - run:
+              name: Pull Docker
+              command: docker pull unityci/editor:windows-2023.1.13f1-android-3.0.1
+          - run:
+              name: Run Docker
+              command: docker run -d --name win-docker -p 8080:80 unityci/editor:windows-2023.1.13f1-android-3.0.1
+          - run:
+              name: Check Docker
+              command: docker version
           # - unity/prepare-env:
           #     cache-version: v2.3.2
           # - unity/build:
@@ -91,15 +100,15 @@ workflows:
       # - unity/create-activation-file:
           # editor_version: 2022.1.11f1
 
-  build-android:
-    jobs:
-      - build-android-ubuntu:
-          context: unity
-
-  # build-android-2:
+  # build-android:
   #   jobs:
-  #     - build-android-window:
+  #     - build-android-ubuntu:
   #         context: unity
+
+  build-android-2:
+    jobs:
+      - build-android-window:
+          context: unity
   
   # build-windows:
   #   jobs:
