@@ -36,6 +36,9 @@ jobs:
           - unity/prepare-env:
               cache-version: v2.1
           - unity/build:
+              unity-license-var-name: 'UNITY_ENCODED_LICENSE'
+              unity-username-var-name: 'UNITY_USERNAME'
+              unity-password-var-name: 'UNITY_PASSWORD'
               build-target: Android
               compress: true
               cache-version: v2.1
@@ -46,15 +49,6 @@ jobs:
               path: Builds/Android
               destination: builds
           - unity/return-license
-
-  windows-spin-up-env:
-        executor:
-          name: windows/default
-        steps:
-          - add_ssh_keys:
-              fingerprints:
-                - "c1:1e:1c:e0:f6:68:6a:38:42:a3:88:bd:41:53:4a:d1"
-          - checkout
     
   # Window Android Build 2
   build-android-window:
@@ -125,6 +119,9 @@ jobs:
           - unity/prepare-env:
               cache-version: v2.3
           - unity/build:
+              unity-license-var-name: 'UNITY_ENCODED_LICENSE'
+              unity-username-var-name: 'UNITY_USERNAME'
+              unity-password-var-name: 'UNITY_PASSWORD'
               build-target: StandaloneWindows64
               compress: true
               cache-version: v2.3
@@ -146,22 +143,20 @@ jobs:
   #             editor_version: "2022.1.11f1"    
 
 workflows:
-  create-activation:
+  # create-activation:
+  #   jobs:
+  #     - unity/create-activation-file
+  #         # editor_version: 2022.1.11f1
+
+  build-android:
     jobs:
-      - unity/create-activation-file
-          # editor_version: 2022.1.11f1
-  # build-android:
-  #   jobs:
-  #     - build-android-ubuntu:
-  #         context: unity
-      
-  #     # - windows-spin-up-env
-  #     # - build-android-window:
-  #         # context: unity
-  #         # requires:
-  #         #   - windows-spin-up-env
+      - build-android-ubuntu:
+          context: unity
   
-  # build-windows:
-  #   jobs:
-  #     - build-window-il2cpp:
-  #         context: unity
+      # - build-android-window:
+      #     context: unity
+  
+  build-windows:
+    jobs:
+      - build-window-il2cpp:
+          context: unity
