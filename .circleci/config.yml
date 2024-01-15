@@ -114,11 +114,11 @@ jobs:
                 - "c1:1e:1c:e0:f6:68:6a:38:42:a3:88:bd:41:53:4a:d1"
           - checkout
           - unity/prepare-env:
-              cache-version: v2.3
+              cache-version: v2.win
           - unity/build:
               build-target: StandaloneWindows64
               compress: true
-              cache-version: v2.3
+              cache-version: v2.win
               # build-method: 'MyWorldBuildCommand.CustomBuildWindows'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
