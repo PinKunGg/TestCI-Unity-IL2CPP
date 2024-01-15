@@ -31,54 +31,39 @@ jobs:
     
   # Window Android Build 2
   build-android-window:
-        # vm_services:
-        #   providers:
-        #     ec2:
-        #       windowsAMI: "unityci/editor:windows-2023.1.13f1-android-3.0.1"
-        # executor:
-        #   name: windows/default
-        docker:
-            - image: cimg/base:2024.01
-          # - image: unityci/editor:ubuntu-2023.1.13f1-android-3.0.1
-        # machine: 
-        #   image: ubuntu-2204:current
-        # executor:
-        #   name: unity/windows-2022
-        #   editor_version: 2023.1.13f1
-        #   size: large
-        #   target_platform: android
+        executor:
+          name: windows/default
+        # docker:
+        #   - image: cimg/base:2024.01
+        #   - image: unityci/editor:ubuntu-2023.1.13f1-android-3.0.1
         steps:
           - add_ssh_keys:
               fingerprints:
-                - "c1:1e:1c:e0:f6:68:6a:38:42:a3:88:bd:41:53:4a:d1"
+                - "65:46:11:49:bf:17:01:02:d9:d3:d9:8b:b4:97:f2:c7"
           - checkout
-          # - docker/pull:
-          #     images: unityci/editor:ubuntu-2023.1.13f1-android-3.0.1
-          # - run:
-          #     name: check docker
-          #     command: docker version
-          # - run:
-          #     name: "docker setup"
-          #     command: |
-          #       docker pull unityci/editor:windows-2023.1.13f1-android-3.0.1
-          #       docker run -it unityci/editor:windows-2023.1.13f1-android-3.0.1 cmd.exe
-          #     timeout: 1h
+          - run:
+              name: check docker
+              command: docker version
+          - run:
+              name: "docker setup"
+              command: docker pull unityci/editor:windows-2023.1.13f1-android-3.0.1
           - setup_remote_docker
-          - unity/prepare-env:
-              cache-version: v2.3.2
-          # # # - unity/test:
-          # # #     test-platform: "playmode"
-          - unity/build:
-              build-target: Android
-              compress: true
-              cache-version: v2.3.2
+          - run:
+              name: check docker after pull
+              command: docker version
+          # - unity/prepare-env:
+          #     cache-version: v2.3.2
+          # - unity/build:
+          #     build-target: Android
+          #     compress: true
+          #     cache-version: v2.3.2
               # build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
           #     project-path: "."
           #     build-method: 'GameCIBuildCommand.PerformBuild'
           # - store_artifacts:
           #     path: Builds/Android
           #     destination: builds
-          - unity/return-license
+          # - unity/return-license
   
   # Window Build 2
   build-window-il2cpp:
@@ -115,15 +100,15 @@ workflows:
       # - unity/create-activation-file:
           # editor_version: 2022.1.11f1
 
-  build-android:
-    jobs:
-      - build-android-ubuntu:
-          context: unity
-
-  # build-android-2:
+  # build-android:
   #   jobs:
-  #     - build-android-window:
+  #     - build-android-ubuntu:
   #         context: unity
+
+  build-android-2:
+    jobs:
+      - build-android-window:
+          context: unity
   
   # build-windows:
   #   jobs:
