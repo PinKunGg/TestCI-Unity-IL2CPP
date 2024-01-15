@@ -56,7 +56,7 @@ jobs:
         # executor:
         #   name: windows/default
         docker:
-          - image: cimg/base:2024.01
+            - image: cimg/base:2024.01
           # - image: unityci/editor:ubuntu-2023.1.13f1-android-3.0.1
         # machine: 
         #   image: ubuntu-2204:current
@@ -150,12 +150,12 @@ workflows:
       # - build-android-window:
       #     context: unity
 
-  build-android-2:
-    jobs:
-      - build-android-window:
-          context: unity
-  
-  # build-windows:
+  # build-android-2:
   #   jobs:
-  #     - build-window-il2cpp:
+  #     - build-android-window:
   #         context: unity
+  
+  build-windows:
+    jobs:
+      - build-window-il2cpp:
+          context: unity
