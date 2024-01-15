@@ -52,7 +52,6 @@ jobs:
           - docker/pull:
               images: unityci/editor:windows-2023.1.13f1-android-3.0.1
               ignore-docker-pull-error: true
-          - docker/install
 
           - run:
               name: check docker after pull
