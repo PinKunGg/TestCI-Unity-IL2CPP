@@ -31,9 +31,12 @@ jobs:
     
   # Window Android Build 2
   build-android-window:
-        executor:
-          name: windows/default
+        # executor:
+          # name: windows/default
           # name: docker/machine
+        machine:
+          image: ubuntu-2204:current
+          resource_class: large
         # docker:
           # - image: cimg/base:2024.01
           # - image: unityci/editor:windows-2023.1.13f1-android-3.0.1
@@ -42,18 +45,12 @@ jobs:
               fingerprints:
                 - "65:46:11:49:bf:17:01:02:d9:d3:d9:8b:b4:97:f2:c7"
           - checkout
-          - run:
-              name: Check Docker
-              command: docker version
-          - run:
-              name: Pull Docker
-              command: docker pull unityci/editor:windows-2023.1.13f1-android-3.0.1
-          - run:
-              name: Run Docker
-              command: docker run -d --name win-docker -p 8080:80 unityci/editor:windows-2023.1.13f1-android-3.0.1
-          - run:
-              name: Check Docker After Pull
-              command: docker version
+          # - run:
+          #     name: Pull Docker
+          #     command: docker pull unityci/editor:windows-2023.1.13f1-android-3.0.1
+          # - run:
+          #     name: Run Docker
+          #     command: docker run -d --name win-docker -p 8080:80 unityci/editor:windows-2023.1.13f1-android-3.0.1
           - unity/prepare-env:
               cache-version: v3.android.winOs
           - unity/build:
