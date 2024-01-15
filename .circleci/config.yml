@@ -45,7 +45,7 @@ jobs:
           - docker/install-docker-tools
           - run:
               name: switch docker container
-              command: & $Env:ProgramFiles\Docker\Docker\DockerCli.exe -SwitchDaemon
+              command: $Env:ProgramFiles\Docker\Docker\DockerCli.exe -SwitchDaemon
           - run:
               name: check docker
               command: docker version
