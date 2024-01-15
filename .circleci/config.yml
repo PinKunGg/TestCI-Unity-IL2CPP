@@ -78,19 +78,19 @@ jobs:
           - run:
               name: "docker setup"
               command: |
-                docker pull unityci/editor:windows-2023.1.13f1-android-3.0.1
+                # docker pull unityci/editor:windows-2023.1.13f1-android-3.0.1
                 docker run -it unityci/editor:windows-2023.1.13f1-android-3.0.1 cmd.exe
               timeout: 1h
           # - setup_remote_docker
-          - unity/prepare-env:
-              cache-version: v2.3.1
+          # - unity/prepare-env:
+          #     cache-version: v2.3.1
           # # - unity/test:
           # #     test-platform: "playmode"
-          - unity/build:
-              build-target: Android
-              compress: true
-              cache-version: v2.3.1
-              build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
+          # - unity/build:
+          #     build-target: Android
+          #     compress: true
+          #     cache-version: v2.3.1
+          #     build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
           # - store_artifacts:
