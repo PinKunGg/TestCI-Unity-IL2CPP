@@ -8,13 +8,13 @@ orbs:
 jobs:
   # Ubuntu Android Build 2
   build-android-ubuntu:
-        # docker:
-        #   - image: unityci/editor:ubuntu-2022.3.17f1-android-3.0.1
-        executor:
-          name: unity/ubuntu
-          editor_version: 2022.3.17f1
-          resource_class: large
-          target_platform: android
+        docker:
+          - image: unityci/editor:ubuntu-2022.3.17f1-android-3.0.1
+        # executor:
+        #   name: unity/ubuntu
+        #   editor_version: 2022.3.17f1
+        #   resource_class: large
+        #   target_platform: android
         steps:
           - checkout
           - setup_remote_docker
@@ -28,9 +28,9 @@ jobs:
               # build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
-          # - store_artifacts:
-              # path: Builds/Android
-              # destination: builds
+          - store_artifacts:
+              path: Builds/Android
+              destination: builds
           # - unity/return-license
     
   # Window Android Build 2
