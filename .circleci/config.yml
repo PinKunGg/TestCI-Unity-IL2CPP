@@ -8,16 +8,21 @@ orbs:
 jobs:
   # Ubuntu Android Build 2
   build-android-ubuntu:
-        docker:
-          - image: unityci/editor:ubuntu-2022.3.17f1-android-3.0.1
+        machine: true
+          resource_class : test_org_3/test4
+        # docker:
+          # - image: unityci/editor:ubuntu-2022.3.17f1-android-3.0.1
         # executor:
         #   name: unity/ubuntu
         #   editor_version: 2022.3.17f1
         #   resource_class: large
         #   target_platform: android
         steps:
+          - add_ssh_keys:
+              fingerprints:
+                - "65:46:11:49:bf:17:01:02:d9:d3:d9:8b:b4:97:f2:c7"
           - checkout
-          - setup_remote_docker
+          # - setup_remote_docker
           - unity/prepare-env:
               cache-version: v3.1.android
           - unity/build:

@@ -90,14 +90,18 @@ public static class MyWorldBuildCommand
 
         BuildPlayerOptions buildOpstions = new()
         {
-            options = BuildOptions.CompressWithLz4,
+            options = BuildOptions.None,
             scenes = GetScences(),
-            locationPathName = "Builds/Android/android.aab",
+            locationPathName = "Builds/Android/android.apk",
             target = BuildTarget.Android,
             targetGroup = BuildTargetGroup.Android
         };
 
+        Console.WriteLine($"::LocationPathName: {buildOpstions.locationPathName}");
+
         var result = BuildPipeline.BuildPlayer(buildOpstions);
+
+        Console.WriteLine($"::File: {result.GetFiles()}");
 
         PrintGameciResult(result.summary);
     }
