@@ -99,7 +99,7 @@ jobs:
 
   runner:
         machine: true
-        resource_class : vari1/test1
+        resource_class : test_org_3/test1
         steps:
           - run: echo "Hi! Do you miss me >w<";
 
