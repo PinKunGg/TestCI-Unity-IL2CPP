@@ -112,14 +112,14 @@ workflows:
       # - unity/create-activation-file:
           # editor_version: 2022.1.11f1
   
-  test-runner:
-    jobs:
-      - runner
-
-  # build-android:
+  # test-runner:
   #   jobs:
-  #     - build-android-ubuntu:
-  #         context: unity
+  #     - runner
+
+  build-android:
+    jobs:
+      - build-android-ubuntu:
+          context: unity
 
   # build-android-2:
   #   jobs:
