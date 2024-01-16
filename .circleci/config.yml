@@ -97,16 +97,26 @@ jobs:
           #     path: Builds/Windows
           #     destination: builds
 
+  runner:
+        machine: true
+        resource_class : vari1/test1
+        steps:
+          - run: echo "Hi! Do you miss me >w<";
+
 workflows:
   # create-activation:
     # jobs:
       # - unity/create-activation-file:
           # editor_version: 2022.1.11f1
-
-  build-android:
+  
+  test-runner:
     jobs:
-      - build-android-ubuntu:
-          context: unity
+      - runner
+
+  # build-android:
+  #   jobs:
+  #     - build-android-ubuntu:
+  #         context: unity
 
   # build-android-2:
   #   jobs:
