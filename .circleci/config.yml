@@ -9,7 +9,7 @@ jobs:
   # Ubuntu Android Build 2
   build-android-ubuntu:
         machine: true
-          resource_class: test_org_3/test4
+        resource_class: test_org_3/test4
         # docker:
           # - image: unityci/editor:ubuntu-2022.3.17f1-android-3.0.1
         # executor:
