@@ -27,9 +27,9 @@ jobs:
               build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
-              - store_artifacts:
-                  path: Builds/Android
-                  destination: builds
+          - store_artifacts:
+              path: Builds/Android
+              destination: builds
           # - unity/return-license
     
   # Window Android Build 2
