@@ -29,7 +29,7 @@ jobs:
               # build-method: 'GameCIBuildCommand.PerformBuild'
           - store_artifacts:
               path: Builds/Android
-              destination: builds
+              destination: android
           # - unity/return-license
     
   # Window Android Build 2
