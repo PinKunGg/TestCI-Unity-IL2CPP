@@ -103,7 +103,7 @@ jobs:
 
   runner:
         machine: true
-        resource_class : test_org_3/test1
+        resource_class : test_org_3/test3
         steps:
           - run: echo "Hi! Do you miss me >w<";
 
@@ -113,14 +113,14 @@ workflows:
       # - unity/create-activation-file:
           # editor_version: 2022.1.11f1
   
-  # test-runner:
-  #   jobs:
-  #     - runner
-
-  build-android:
+  test-runner:
     jobs:
-      - build-android-ubuntu:
-          context: unity
+      - runner
+
+  # build-android:
+  #   jobs:
+  #     - build-android-ubuntu:
+  #         context: unity
 
   # build-android-2:
   #   jobs:
