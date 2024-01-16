@@ -24,9 +24,9 @@ jobs:
               build-target: Android
               compress: true
               cache-version: v3.1.android
-              # build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
+              build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
               # project-path: "."
-              build-method: 'GameCIBuildCommand.PerformBuild'
+              # build-method: 'GameCIBuildCommand.PerformBuild'
           # - unity/return-license
     
   # Window Android Build 2
@@ -89,7 +89,7 @@ jobs:
               build-target: StandaloneWindows64
               compress: true
               cache-version: v3.win
-              build-method: 'MyWorldBuildCommand.CustomBuildWindows'
+              # build-method: 'MyWorldBuildCommand.CustomBuildWindows'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
           # - unity/return-license
