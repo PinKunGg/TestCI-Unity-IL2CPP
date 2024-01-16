@@ -221,6 +221,11 @@ static class GameCIBuildCommand
         var buildOptions = GetBuildOptions();
         var fixedBuildPath = GetFixedBuildPath(buildTarget, buildPath, buildName);
 
+        Console.WriteLine($"::BuildPath: {buildPath}");
+        Console.WriteLine($"::BuildName: {buildName}");
+        Console.WriteLine($"::BuildTarget: {buildTarget}");
+        Console.WriteLine($"::FixedBuildPath: {fixedBuildPath}");
+
         SetScriptingBackendFromEnv(buildTarget);
 
         var buildReport = BuildPipeline.BuildPlayer(GetEnabledScenes(), fixedBuildPath, buildTarget, buildOptions);
