@@ -111,9 +111,9 @@ public static class MyWorldBuildCommand
 
         BuildPlayerOptions buildOpstions = new()
         {
-            options = BuildOptions.Development,
+            options = BuildOptions.CompressWithLz4,
             scenes = GetScences(),
-            locationPathName = "Builds/Windows/windows_app.exe",
+            locationPathName = "Builds/Android/android.aab",
             target = BuildTarget.StandaloneWindows64,
             targetGroup = BuildTargetGroup.Standalone
         };
