@@ -23,13 +23,14 @@ jobs:
           - unity/build:
               build-target: Android
               compress: true
+              store-artifacts: true
               cache-version: v3.1.android
               build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
-          # - store_artifacts:
-              # path: Builds/Android
-              # destination: android
+          - store_artifacts:
+              path: /root/project/./Builds/Android
+              destination: android-file
           # - unity/return-license
     
   # Window Android Build 2
