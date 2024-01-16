@@ -22,14 +22,14 @@ jobs:
               cache-version: v3.1.android
           - unity/build:
               build-target: Android
-              compress: true
+              compress: false
               store-artifacts: true
               cache-version: v3.1.android
-              # build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
+              build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
-          # - store_artifacts:
-              # path: Builds/Android
+          - store_artifacts:
+              path: Builds/Android
               # destination: builds
           # - unity/return-license
     
@@ -113,14 +113,14 @@ workflows:
       # - unity/create-activation-file:
           # editor_version: 2022.1.11f1
   
-  test-runner:
-    jobs:
-      - runner
-
-  # build-android:
+  # test-runner:
   #   jobs:
-  #     - build-android-ubuntu:
-  #         context: unity
+  #     - runner
+
+  build-android:
+    jobs:
+      - build-android-ubuntu:
+          context: unity
 
   # build-android-2:
   #   jobs:
