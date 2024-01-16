@@ -90,9 +90,9 @@ public static class MyWorldBuildCommand
 
         BuildPlayerOptions buildOpstions = new()
         {
-            options = BuildOptions.Development,
+            options = BuildOptions.CompressWithLz4,
             scenes = GetScences(),
-            locationPathName = "Builds/Android/android.apk",
+            locationPathName = "Builds/Android/android.aab",
             target = BuildTarget.Android,
             targetGroup = BuildTargetGroup.Android
         };
@@ -111,7 +111,7 @@ public static class MyWorldBuildCommand
 
         BuildPlayerOptions buildOpstions = new()
         {
-            options = BuildOptions.CompressWithLz4,
+            options = BuildOptions.Development,
             scenes = GetScences(),
             locationPathName = "Builds/Android/android.aab",
             target = BuildTarget.StandaloneWindows64,
