@@ -89,9 +89,9 @@ jobs:
               build-target: StandaloneWindows64
               compress: true
               cache-version: v3.win
-              # build-method: 'MyWorldBuildCommand.CustomBuildWindows'
+              build-method: 'MyWorldBuildCommand.CustomBuildWindows'
               # project-path: "."
-              build-method: 'GameCIBuildCommand.PerformBuild'
+              # build-method: 'GameCIBuildCommand.PerformBuild'
           # - unity/return-license
           # - store_artifacts:
           #     path: Builds/Windows
