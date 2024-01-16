@@ -26,7 +26,7 @@ jobs:
               cache-version: v3.1.android
               # build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
               # project-path: "."
-              # build-method: 'GameCIBuildCommand.PerformBuild'
+              build-method: 'GameCIBuildCommand.PerformBuild'
           # - unity/return-license
     
   # Window Android Build 2
@@ -62,7 +62,7 @@ jobs:
               cache-version: v3.android.window
               # build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
           #     project-path: "."
-              build-method: 'GameCIBuildCommand.PerformBuild'
+              # build-method: 'GameCIBuildCommand.PerformBuild'
           # - store_artifacts:
           #     path: Builds/Android
           #     destination: builds
@@ -113,15 +113,15 @@ workflows:
   #   jobs:
   #     - runner
 
-  # build-android:
-  #   jobs:
-  #     - build-android-ubuntu:
-  #         context: unity
-
-  build-android-2:
+  build-android:
     jobs:
-      - build-android-window:
+      - build-android-ubuntu:
           context: unity
+
+  # build-android-2:
+  #   jobs:
+  #     - build-android-window:
+  #         context: unity
   
   # build-windows:
   #   jobs:
