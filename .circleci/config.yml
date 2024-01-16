@@ -105,7 +105,7 @@ jobs:
         machine: true
         resource_class : test_org_3/test3
         steps:
-          - run: echo "Hi! Do you miss me >w<!";
+          - run: echo "Hi! Do you miss me >w<";
 
 workflows:
   # create-activation:
