@@ -62,7 +62,7 @@ jobs:
               cache-version: v3.android.window
               # build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
           #     project-path: "."
-          #     build-method: 'GameCIBuildCommand.PerformBuild'
+              build-method: 'GameCIBuildCommand.PerformBuild'
           # - store_artifacts:
           #     path: Builds/Android
           #     destination: builds
@@ -109,19 +109,19 @@ workflows:
       # - unity/create-activation-file:
           # editor_version: 2022.1.11f1
   
-  test-runner:
-    jobs:
-      - runner
+  # test-runner:
+  #   jobs:
+  #     - runner
 
   # build-android:
   #   jobs:
   #     - build-android-ubuntu:
   #         context: unity
 
-  # build-android-2:
-  #   jobs:
-  #     - build-android-window:
-  #         context: unity
+  build-android-2:
+    jobs:
+      - build-android-window:
+          context: unity
   
   # build-windows:
   #   jobs:
