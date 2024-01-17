@@ -176,7 +176,8 @@ public static class MyWorldBuildCommand
     {
         if (summary.result != BuildResult.Succeeded)
         {
-            $"{Environment.NewLine}" +
+            Console.WriteLine(
+                $"{Environment.NewLine}" +
                 $"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx{Environment.NewLine}" +
                 $"x      !! Build Failed !!       x{Environment.NewLine}" +
                 $"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx{Environment.NewLine}" +
@@ -186,6 +187,7 @@ public static class MyWorldBuildCommand
                 $"Errors: {summary.totalErrors}{Environment.NewLine}" +
                 $"Size: {summary.totalSize} bytes{Environment.NewLine}" +
                 $"{Environment.NewLine}"
+            );
             return;
         }
         // This format is required by the game-ci build action
