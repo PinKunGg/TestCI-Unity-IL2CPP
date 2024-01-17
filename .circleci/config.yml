@@ -34,7 +34,7 @@ jobs:
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
           - store_artifacts:
-              path: Builds/Android
+              path: /root/project/pakapow-mobile/Builds/Android/
           # - unity/return-license
     
   # Window Android Build 2
