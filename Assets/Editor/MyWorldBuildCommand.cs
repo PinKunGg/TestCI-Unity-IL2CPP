@@ -176,6 +176,16 @@ public static class MyWorldBuildCommand
     {
         if (summary.result != BuildResult.Succeeded)
         {
+            $"{Environment.NewLine}" +
+                $"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx{Environment.NewLine}" +
+                $"x      !! Build Failed !!       x{Environment.NewLine}" +
+                $"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx{Environment.NewLine}" +
+                $"{Environment.NewLine}" +
+                $"Duration: {summary.totalTime}{Environment.NewLine}" +
+                $"Warnings: {summary.totalWarnings}{Environment.NewLine}" +
+                $"Errors: {summary.totalErrors}{Environment.NewLine}" +
+                $"Size: {summary.totalSize} bytes{Environment.NewLine}" +
+                $"{Environment.NewLine}"
             return;
         }
         // This format is required by the game-ci build action

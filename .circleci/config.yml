@@ -11,7 +11,7 @@ jobs:
         # machine: true
         # resource_class: test_org_3/test4
         docker:
-          - image: unityci/editor:ubuntu-2021.3.34f1-android-3.0.1
+          - image: unityci/editor:ubuntu-2023.1.13f1-android-3.0.1
         # executor:
         #   name: unity/ubuntu
         #   editor_version: 2022.3.17f1
@@ -30,12 +30,11 @@ jobs:
               compress: true
               store-artifacts: true
               cache-version: v3.1.android
-              # build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
+              build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
               # project-path: "."
               # build-method: 'GameCIBuildCommand.PerformBuild'
           - store_artifacts:
               path: Builds/Android
-              destination: builds
           # - unity/return-license
     
   # Window Android Build 2
