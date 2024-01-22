@@ -36,6 +36,24 @@ jobs:
           - store_artifacts:
               path: /root/project/pakapow-mobile/Builds/Android/
           # - unity/return-license
+  
+    # Ubuntu IOS Build
+  build-ios-ubuntu:
+        docker:
+          - image: unityci/editor:ubuntu-2023.1.13f1-ios-3.0.1
+        steps:
+          - checkout
+          - setup_remote_docker
+          - unity/prepare-env:
+              cache-version: v3.1.ios
+          - unity/build:
+              build-target: F
+              compress: true
+              store-artifacts: true
+              cache-version: v3.1.ios
+              build-method: 'MyWorldBuildCommand.CustomBuildAndroid'
+          - store_artifacts:
+              path: /root/project/pakapow-mobile/Builds/F/
     
   # Window Android Build 2
   build-android-window:
@@ -125,6 +143,11 @@ workflows:
     jobs:
       - build-android-ubuntu:
           context: unity
+          filters:
+            branches:
+              only:
+                - main
+                - test1
 
   # build-android-2:
   #   jobs:
